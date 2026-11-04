@@ -1,20 +1,104 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/en/b/bf/UEFA_Champions_League_logo_2021.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simulador UEFA Champions League 2026/2027</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-      body { font-family: 'Inter', sans-serif; }
-    </style>
-  </head>
-  <body class="bg-[#070d19] text-slate-100">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador Champions League 2026/27</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap">
+<style>
+:root{--bg:#070b1f;--card:#101733;--line:#26305c;--tx:#eef1ff;--mut:#8d97c4;--blue:#3a5bff;--gold:#e9c46a;--ok:#2ecc8f;--bad:#e5586b}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#16215a 0,var(--bg) 55%) fixed;color:var(--tx);font:400 15px/1.4 Barlow,system-ui,sans-serif}
+h1,h2,.sc,.big{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:700}
+.w{max-width:1100px;margin:0 auto;padding:20px 14px 60px}
+h1{font-size:34px;margin:0}h1 small{color:var(--gold);font-size:18px;margin-left:8px}
+.sub{color:var(--mut);margin:2px 0 16px}
+.steps{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+.steps span{padding:6px 14px;border:1px solid var(--line);border-radius:99px;color:var(--mut);white-space:nowrap}
+.steps .on{background:var(--blue);border-color:var(--blue);color:#fff}.steps .ok{color:var(--tx);border-color:var(--ok)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+button{font:500 14px Barlow,sans-serif;background:var(--blue);color:#fff;border:0;border-radius:8px;padding:9px 15px;cursor:pointer}
+button:hover{filter:brightness(1.15)}button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button.g{background:transparent;border:1px solid var(--line);color:var(--tx)}button.gold{background:var(--gold);color:#1a1400}
+button:disabled{opacity:.35;cursor:default}
+.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+table{width:100%;border-collapse:collapse}th{color:var(--mut);font-weight:500;text-align:center;padding:4px}
+td{padding:5px 4px;text-align:center;border-top:1px solid var(--line)}td.n{text-align:left}
+td:first-child{border-left:4px solid transparent}tr.q td:first-child{border-color:var(--ok)}tr.p td:first-child{border-color:var(--gold)}tr.e td:first-child{border-color:var(--bad)}
+td.pt{font-weight:700;font-size:16px}
+.c{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font:700 10px 'Barlow Condensed',sans-serif;font-style:normal;color:#fff;margin:0 7px 0 0;vertical-align:middle;border:1px solid #ffffff40}
+.tabs{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}.tabs button{padding:5px 11px;background:transparent;border:1px solid var(--line);color:var(--mut)}.tabs .on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.m{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:9px 0;border-top:1px solid var(--line)}
+.m:first-of-type{border-top:0}.m .r{text-align:right}.m .r .c{margin:0 0 0 7px}
+.sc{font-size:24px;min-width:64px;text-align:center;color:var(--gold)}
+.m button{grid-column:1/-1;justify-self:center;padding:4px 14px;font-size:13px}
+.gl{grid-column:1/-1;display:flex;justify-content:space-between;color:var(--mut);font-size:12px}
+.ties{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px}
+.res{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line);text-align:center;color:var(--mut);font-size:13px}.res b{color:var(--ok)}
+.champ{text-align:center;padding:30px 10px}.big{font-size:56px;margin:10px 0}.champ .c{width:70px;height:70px;font-size:22px;margin:0}
+.note{color:var(--mut);font-size:12px;margin-top:26px}
+</style>
+</head>
+<body>
+<div class="w"><h1>Champions League<small>2026/27</small></h1>
+<p class="sub">Fase liga de 36 equipos, play-off, eliminatorias a ida y vuelta y final a partido único.</p>
+<div id="app"></div>
+<p class="note">Los resultados son simulaciones aleatorias ponderadas por la fuerza de cada equipo (goles por distribución de Poisson, localía incluida). Los favoritos ganan más seguido, pero las sorpresas son posibles y poco frecuentes. Los ratings son aproximados.</p></div>
+<script>
+const T=[["AEK Atenas","AEK",1660],["Arsenal","ARS",2000],["Aston Villa","AVL",1840],["Atlético de Madrid","ATM",1900],["Barcelona","BAR",1990],["Bayern München","BAY",2010],["Bodø/Glimt","BOD",1680],["Borussia Dortmund","BVB",1860],["Club Brugge","BRU",1740],["Como","COM",1740],["Fenerbahçe","FEN",1740],["Feyenoord","FEY",1760],["Galatasaray","GAL",1760],["Inter","INT",1930],["LASK","LAS",1620],["Lens","LEN",1750],["Lille","LIL",1760],["Liverpool","LIV",1970],["Manchester City","MCI",1990],["Manchester United","MUN",1830],["Napoli","NAP",1850],["Paris Saint-Germain","PSG",2020],["Porto","POR",1790],["PSV Eindhoven","PSV",1790],["RB Leipzig","RBL",1830],["Real Betis","BET",1780],["Real Madrid","RMA",1990],["Roma","ROM",1800],["Sabah","SAB",1560],["Shakhtar Donetsk","SHA",1700],["Slavia Praha","SLA",1700],["Slovan Bratislava","SLO",1540],["Sporting CP","SCP",1830],["VfB Stuttgart","STU",1780],["Viking","VIK",1600],["Villarreal","VIL",1780]];
+const ST=['liga','playoff','r16','qf','sf','final','champ'],NM={liga:'Fase liga',playoff:'Play-off',r16:'Octavos',qf:'Cuartos',sf:'Semifinales',final:'Final',champ:'Campeón'};
+const rnd=Math.random;let S;
+const pois=l=>{const L=Math.exp(-l);let k=0,p=1;do{k++;p*=rnd()}while(p>L);return k-1};
+const mins=(n,lo,hi)=>Array.from({length:n},()=>lo+Math.floor(rnd()*(hi-lo+1))).sort((a,b)=>a-b);
+const mk=(h,a,n)=>({h,a,hg:0,ag:0,done:false,hm:[],am:[],n});
+function play(m,et){const d=T[m.h][2]-T[m.a][2]+(m.n?0:55),f=et?.33:1;
+ const gh=pois(1.35*Math.exp(d/800)*f),ga=pois(1.1*Math.exp(-d/800)*f),[lo,hi]=et?[91,120]:[1,90];
+ m.hg+=gh;m.ag+=ga;m.hm.push(...mins(gh,lo,hi));m.am.push(...mins(ga,lo,hi))}
+const simM=m=>{if(!m.done){play(m,0);m.done=true}};
+const mkTie=(a,b,one)=>({a,b,l:one?[mk(a,b,1)]:[mk(a,b),mk(b,a)]});
+function agg(t){let x=0,y=0;t.l.forEach(m=>{if(m.h==t.a){x+=m.hg;y+=m.ag}else{x+=m.ag;y+=m.hg}});return[x,y]}
+function simT(t){if(t.done)return;t.l.forEach(simM);let[x,y]=agg(t);
+ if(x==y){const m=t.l[t.l.length-1];play(m,1);t.et=1;[x,y]=agg(t)}
+ if(x==y){const wa=rnd()<.5+(T[t.a][2]-T[t.b][2])/4000,w=4+Math.floor(rnd()*2),l=w-1-Math.floor(rnd()*2);t.pen=wa?[w,l]:[l,w];[x,y]=t.pen}
+ t.w=x>y?t.a:t.b;t.done=true}
+function table(){const r=T.map((_,i)=>({i,pj:0,gf:0,ga:0,pts:0}));
+ S.md.flat().filter(m=>m.done).forEach(m=>{const H=r[m.h],A=r[m.a];H.pj++;A.pj++;H.gf+=m.hg;H.ga+=m.ag;A.gf+=m.ag;A.ga+=m.hg;
+  if(m.hg>m.ag)H.pts+=3;else if(m.hg<m.ag)A.pts+=3;else{H.pts++;A.pts++}});
+ return r.sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf||T[b.i][2]-T[a.i][2])}
+function init(){const o=T.map((_,i)=>i).sort(()=>rnd()-.5),md=[];
+ for(const d of[1,5,9,13])for(const p of[0,1]){const r=[];for(let i=p;i<36;i+=2)r.push(mk(o[i],o[(i+d)%36]));md.push(r)}
+ S={md,st:'liga',day:0,ties:{},top:[]};render()}
+const done=()=>S.st=='liga'?S.md.flat().every(m=>m.done):S.ties[S.st].every(t=>t.done);
+function simStage(){if(S.st=='liga')S.md.flat().forEach(simM);else S.ties[S.st].forEach(simT)}
+function adv(){const s=S.st,i=ST.indexOf(s);
+ if(s=='liga'){const t=table().map(x=>x.i);S.top=t.slice(0,8);S.ties.playoff=[...Array(8).keys()].map(k=>mkTie(t[23-k],t[8+k]))}
+ else if(s=='playoff'){const w=S.ties.playoff.map(t=>t.w);S.ties.r16=[...Array(8).keys()].map(k=>mkTie(w[7-k],S.top[k]))}
+ else if(s=='final'){S.ch=S.ties.final[0].w}
+ else{const w=S.ties[s].map(t=>t.w),n=ST[i+1],a=[];for(let k=0;k<w.length;k+=2)a.push(mkTie(w[k],w[k+1],n=='final'));S.ties[n]=a}
+ S.st=ST[i+1];S.day=0;render()}
+function all(){while(S.st!='champ'){simStage();adv()}}
+const hue=s=>[...s].reduce((a,c)=>a*31+c.charCodeAt(0),7)%360;
+const cr=i=>`<i class="c" style="background:hsl(${hue(T[i][0])} 55% 36%)">${T[i][1]}</i>`;
+const mr=(m,btn)=>`<div class="m"><span>${cr(m.h)}${T[m.h][0]}</span><b class="sc">${m.done?m.hg+' – '+m.ag:'vs'}</b><span class="r">${T[m.a][0]}${cr(m.a)}</span>${m.done?`<div class="gl"><span>${m.hm.map(x=>x+"'").join(' ')}</span><span>${m.am.map(x=>x+"'").join(' ')}</span></div>`:btn||''}</div>`;
+function tieCard(t,k){let r='';if(t.done){const[x,y]=agg(t);r=`<div class="res">${t.l.length>1?`Global ${x}–${y}`:''}${t.et?' · prórroga':''}${t.pen?` · penales ${t.pen[0]}–${t.pen[1]}`:''}<br>Pasa: <b>${T[t.w][0]}</b></div>`}
+ return`<div class="card">${t.l.map((m,j)=>mr(m,j?'':`<button onclick="simTie(${k})">Simular ${t.l.length>1?'eliminatoria':'final'}</button>`)).join('')}${r}</div>`}
+function render(){const s=S.st,i=ST.indexOf(s);let h=`<div class="steps">${ST.map((x,j)=>`<span class="${j==i?'on':j<i?'ok':''}">${NM[x]}</span>`).join('')}</div><div class="bar">`;
+ if(s!='champ'){h+=s=='liga'?`<button onclick="simDay()" ${S.md[S.day].every(m=>m.done)?'disabled':''}>Simular jornada ${S.day+1}</button><button class="g" onclick="simStage();render()">Simular fase liga</button>`:`<button onclick="simStage();render()" ${done()?'disabled':''}>Simular ronda</button>`;
+  h+=`<button class="gold" onclick="adv()" ${done()?'':'disabled'}>${s=='final'?'Coronar campeón':'Avanzar a '+NM[ST[i+1]]}</button><button class="g" onclick="all()">Simular todo el torneo</button>`}
+ h+=`<button class="g" onclick="init()">Reiniciar</button></div>`;
+ if(s=='liga'){const tb=table();
+  h+=`<div class="grid"><div class="card"><table><tr><th>#<th style="text-align:left">Equipo<th>PJ<th>DG<th>PTS</tr>${tb.map((r,p)=>`<tr class="${p<8?'q':p<24?'p':'e'}"><td>${p+1}<td class="n">${cr(r.i)}${T[r.i][0]}<td>${r.pj}<td>${r.gf-r.ga>0?'+':''}${r.gf-r.ga}<td class="pt">${r.pts}</tr>`).join('')}</table></div>
+  <div class="card"><div class="tabs">${S.md.map((_,d)=>`<button class="${d==S.day?'on':''}" onclick="S.day=${d};render()">J${d+1}</button>`).join('')}</div>${S.md[S.day].map((m,k)=>mr(m,`<button class="g" onclick="simOne(${k})">Simular</button>`)).join('')}</div></div>
+  <p class="note">Verde: directo a octavos (1–8). Dorado: play-off (9–24). Rojo: eliminados (25–36).</p>`}
+ else if(s=='champ'){const f=S.ties.final[0];h+=`<div class="card champ"><div style="font-size:60px">🏆</div>${cr(S.ch)}<div class="big">${T[S.ch][0]}</div><div>Campeón de Europa 2026/27</div></div><div class="ties" style="margin-top:12px">${tieCard(f,0)}</div>`}
+ else h+=`<div class="ties">${S.ties[s].map(tieCard).join('')}</div>`;
+ document.getElementById('app').innerHTML=h}
+const simDay=()=>{S.md[S.day].forEach(simM);render()};
+const simOne=k=>{simM(S.md[S.day][k]);render()};
+const simTie=k=>{simT(S.ties[S.st][k]);render()};
+init();
+</script>
+</body>
 </html>
