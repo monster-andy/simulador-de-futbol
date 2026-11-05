@@ -8,10 +8,10 @@
 <title>Simulador Champions League 2026/27</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap">
 <style>
-:root{--bg:#050a24;--bg2:#0b1445;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.1);--tx:#f2f4ff;--mut:#98a2cf;--blue:#4f6bff;--gold:#f1c96b;--ok:#35d69a;--bad:#ef5d73}
+:root{--bg:#050a24;--bg2:#0b1445;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.1);--tx:#f2f4ff;--mut:#98a2cf;--blue:#4f6bff;--gold:#f1c96b;--ok:#35d69a;--bad:#ef5d73;--drw:#5b648f}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;color:var(--tx);font:400 15px/1.45 Barlow,system-ui,sans-serif;background:radial-gradient(1000px 520px at 85% -8%,#2a3cb855,transparent 60%),radial-gradient(800px 480px at -10% 12%,#4a2a9a38,transparent 55%),linear-gradient(180deg,var(--bg2),var(--bg) 460px);background-color:var(--bg);background-attachment:fixed}
-h1,h2,.sc,.big,td.pt{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:700}
+h1,h2,h3,.sc,.big,td.pt{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:700}
 .w{max-width:1120px;margin:0 auto;padding:18px 14px 64px}
 .hero{display:flex;align-items:center;gap:22px;padding:22px 26px;margin-bottom:18px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(115deg,#1a2a9a 0,#0d1850 52%,#080e30 100%);box-shadow:0 18px 50px #00000055}
 .hero svg{flex:none;width:96px;height:96px;filter:drop-shadow(0 0 16px #f1c96b66)}
@@ -27,21 +27,23 @@ h1 small{display:block;font-size:.4em;color:var(--gold);margin-top:8px;letter-sp
 .bar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
 button{font:500 14px Barlow,sans-serif;background:linear-gradient(180deg,#5d78ff,#3b55e6);box-shadow:0 4px 14px #3a55e655;color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;transition:transform .12s,filter .12s}
 button:hover{filter:brightness(1.12);transform:translateY(-1px)}button:active{transform:none}
-button:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button:focus-visible,select:focus-visible,tr:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 button.g{background:var(--card);box-shadow:none;border:1px solid var(--line)}
 button.gold{background:linear-gradient(180deg,#f7d98a,#e6b84e);color:#1a1400;box-shadow:0 4px 16px #f1c96b44}
 button:disabled{opacity:.35;cursor:default;transform:none;filter:none}
 .pick{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:inherit}.pick option{background:#0b1445}
-.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start}
+.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:start}
 @media(max-width:820px){.grid{grid-template-columns:1fr}.hero{padding:16px}.hero svg{width:64px;height:64px}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;backdrop-filter:blur(6px)}
 table{width:100%;border-collapse:collapse}th{color:var(--mut);font-weight:500;font-size:13px;text-align:center;padding:4px 4px 8px}
 td{padding:7px 4px;text-align:center;border-top:1px solid rgba(255,255,255,.06);font-variant-numeric:tabular-nums}td.n{text-align:left;font-weight:500;white-space:nowrap}
-td:first-child{border-left:3px solid transparent;color:var(--mut);width:34px}
+td:first-child{border-left:3px solid transparent;color:var(--mut);width:34px;white-space:nowrap}
 tr.q td:first-child{border-color:var(--ok)}tr.p td:first-child{border-color:var(--gold)}tr.e td:first-child{border-color:var(--bad)}
 td.pt{font-size:20px;color:var(--gold)}
+.mv{display:block;font-size:9.5px;line-height:1}.mv.u{color:var(--ok)}.mv.d{color:var(--bad)}
+.fm{white-space:nowrap}.fm i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 1.5px;vertical-align:middle}.fG{background:var(--ok)}.fE{background:var(--drw)}.fP{background:var(--bad)}
 @media(max-width:520px){.hm{display:none}}
-.c{position:relative;overflow:hidden;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;font:700 10px 'Barlow Condensed',sans-serif;font-style:normal;color:#fff;margin:0 9px 0 0;vertical-align:middle;border:1px solid #ffffff40;box-shadow:0 2px 6px #0006}
+.c{position:relative;overflow:hidden;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;font:700 10px 'Barlow Condensed',sans-serif;font-style:normal;color:#fff;margin:0 9px 0 0;vertical-align:middle;border:1px solid #ffffff40;box-shadow:0 2px 6px #0006;flex:none}
 .c img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:3px;background:#fff}
 tr.me,.m.me{background:linear-gradient(90deg,#4f6bff33,transparent)}tr.me td.n,.m.me .sc{color:#fff}
 .tabs{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}.tabs button{padding:6px 12px;background:transparent;box-shadow:none;border:1px solid var(--line);color:var(--mut)}
@@ -51,7 +53,11 @@ tr.me,.m.me{background:linear-gradient(90deg,#4f6bff33,transparent)}tr.me td.n,.
 .m:first-of-type{border-top:0}.m>span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}.m .r{text-align:right}.m .r .c{margin:0 0 0 9px}
 .sc{font-size:26px;min-width:76px;text-align:center;color:var(--gold);background:#0006;border:1px solid var(--line);border-radius:10px;padding:1px 10px;line-height:1.3}
 .m button{grid-column:1/-1;justify-self:center;padding:5px 16px;font-size:13px}
-.gl{grid-column:1/-1;display:flex;justify-content:space-between;color:var(--mut);font-size:12px}
+.gl{grid-column:1/-1;display:flex;justify-content:space-between;gap:10px;color:var(--mut);font-size:12px}.gl span:last-child{text-align:right}
+.tl{grid-column:1/-1;position:relative;height:22px;margin:0 6px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:10px;height:2px;background:var(--line);border-radius:2px}
+.tl b{position:absolute;top:6px;width:1px;height:10px;background:#ffffff38}
+.tl i{position:absolute;width:9px;height:9px;border-radius:50%;margin-left:-4.5px;border:1px solid #0009}.tl i.h{top:0;background:var(--blue)}.tl i.a{top:13px;background:var(--gold)}
 .pr{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;font-size:12px;color:var(--mut)}
 .bar3{grid-column:1/-1;display:flex;height:6px;border-radius:4px;overflow:hidden;margin-bottom:3px;background:var(--line);gap:2px}.bar3 u{display:block;height:100%}
 .pr span:nth-child(3){text-align:center}.pr span:nth-child(4){text-align:right}
@@ -61,8 +67,26 @@ tr.me,.m.me{background:linear-gradient(90deg,#4f6bff33,transparent)}tr.me td.n,.
 .res{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);text-align:center;color:var(--mut);font-size:13px}.res b{color:var(--ok)}
 .champ{text-align:center;padding:44px 14px;border-color:#f1c96b66;background:radial-gradient(520px 240px at 50% 0,#f1c96b30,transparent 70%),var(--card)}
 .big{font-size:clamp(40px,8vw,76px);line-height:1;margin:14px 0;color:var(--gold)}.champ .c{width:76px;height:76px;font-size:22px;margin:0}
-.fc{overflow-x:auto}.fc table{min-width:700px}.fc td{font-size:13.5px}.fc td.v{border-radius:6px}
+/* Probabilidades */
+.fc{overflow-x:auto}.fc table{min-width:760px}.fc td{font-size:13.5px;padding:6px 4px}.fc tbody tr{cursor:pointer}.fc tbody tr:hover{background:#ffffff08}.fc tr.sel{background:#f1c96b1c}
 .fc .hd{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;color:var(--mut);font-size:13px;margin:0 2px 10px}
+.zb{display:flex;height:12px;border-radius:6px;overflow:hidden;min-width:130px;background:#ffffff0d}.zb u{display:block;height:100%}
+.pb{position:relative;height:22px;border-radius:6px;background:#ffffff0b;overflow:hidden;min-width:58px}.pb i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#f1c96b40,#f1c96bbb)}.pb span{position:relative;line-height:22px;font-size:12.5px}
+.lg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mut)}.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.det{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:14px}
+@media(max-width:900px){.det{grid-template-columns:1fr}}
+.det h3{font-size:24px;margin:0 0 2px;display:flex;align-items:center}.det h4{margin:0 0 6px;font:600 13px Barlow,sans-serif;color:var(--mut);text-transform:uppercase;letter-spacing:.8px}
+.k{color:var(--mut);font-size:12.5px;margin:6px 0 0}.k b{color:var(--tx);font-weight:500}
+.fun div{display:grid;grid-template-columns:72px 1fr 46px;align-items:center;gap:8px;font-size:13px;margin:5px 0}.fun s{display:block;height:10px;border-radius:5px;background:#ffffff10;overflow:hidden;text-decoration:none}.fun s u{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--blue),#9aabff)}.fun span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.ch{width:100%;height:auto;display:block;overflow:visible}
+/* Cuadro */
+.brw{overflow-x:auto;padding-bottom:6px}.br{display:grid;grid-template-columns:repeat(4,minmax(165px,1fr)) minmax(140px,.8fr);gap:14px;min-width:860px}
+.br .col{display:flex;flex-direction:column}.br h4{margin:0 0 8px;text-align:center;color:var(--mut);font:600 15px 'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.br .in{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:10px}
+.nd{border:1px solid var(--line);border-radius:10px;background:#ffffff08;overflow:hidden}.nd>div{display:flex;align-items:center;gap:7px;padding:5px 8px;font-size:13px;min-height:31px}.nd>div+div{border-top:1px solid #ffffff12}
+.nd .c{width:20px;height:20px;font-size:7px;margin:0;box-shadow:none}.nd em{flex:1;min-width:0;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nd b{font:700 15px 'Barlow Condensed',sans-serif;color:var(--gold)}
+.nd .w em{color:#fff;font-weight:500}.nd .l{opacity:.45}.nd .me{background:#4f6bff33}.nd .tbd em{color:var(--mut);font-style:italic}.nd small{display:block;text-align:center;color:var(--mut);font-size:11px;padding:2px 4px;border-top:1px solid #ffffff12}
+.trophy{text-align:center;border:1px solid #f1c96b66;border-radius:14px;padding:16px 8px;background:radial-gradient(160px 90px at 50% 0,#f1c96b30,transparent 70%)}.trophy .c{width:46px;height:46px;font-size:13px;margin:6px 0}
 @keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
 .champ>div:first-child{animation:pop .7s cubic-bezier(.2,1.4,.4,1)}
 @media(prefers-reduced-motion:reduce){.champ>div:first-child{animation:none}button{transition:none}}
@@ -72,7 +96,7 @@ tr.me,.m.me{background:linear-gradient(90deg,#4f6bff33,transparent)}tr.me td.n,.
 <body>
 <div class="w"><header class="hero"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#f1c96b"><polygon points="50.0,6.8 51.4,10.1 54.9,10.4 52.2,12.7 53.1,16.2 50.0,14.3 46.9,16.2 47.8,12.7 45.1,10.4 48.6,10.1"/><polygon points="76.9,17.9 78.2,21.2 81.8,21.5 79.1,23.9 79.9,27.3 76.9,25.5 73.8,27.3 74.6,23.9 71.9,21.5 75.5,21.2"/><polygon points="88.0,44.8 89.4,48.1 92.9,48.4 90.2,50.7 91.1,54.2 88.0,52.3 84.9,54.2 85.8,50.7 83.1,48.4 86.6,48.1"/><polygon points="76.9,71.7 78.2,75.0 81.8,75.3 79.1,77.6 79.9,81.1 76.9,79.2 73.8,81.1 74.6,77.6 71.9,75.3 75.5,75.0"/><polygon points="50.0,82.8 51.4,86.1 54.9,86.4 52.2,88.7 53.1,92.2 50.0,90.3 46.9,92.2 47.8,88.7 45.1,86.4 48.6,86.1"/><polygon points="23.1,71.7 24.5,75.0 28.1,75.3 25.4,77.6 26.2,81.1 23.1,79.2 20.1,81.1 20.9,77.6 18.2,75.3 21.8,75.0"/><polygon points="12.0,44.8 13.4,48.1 16.9,48.4 14.2,50.7 15.1,54.2 12.0,52.3 8.9,54.2 9.8,50.7 7.1,48.4 10.6,48.1"/><polygon points="23.1,17.9 24.5,21.2 28.1,21.5 25.4,23.9 26.2,27.3 23.1,25.5 20.1,27.3 20.9,23.9 18.2,21.5 21.8,21.2"/></g><circle cx="50" cy="50" r="26" fill="#f4f6ff"/><g fill="#0b1445"><polygon points="50.0,41.0 58.6,47.2 55.3,57.3 44.7,57.3 41.4,47.2"/></g><g stroke="#0b1445" stroke-width="1.6" stroke-linecap="round"><line x1="50.0" y1="41.0" x2="50.0" y2="25.0"/><line x1="58.6" y1="47.2" x2="73.8" y2="42.3"/><line x1="55.3" y1="57.3" x2="64.7" y2="70.2"/><line x1="44.7" y1="57.3" x2="35.3" y2="70.2"/><line x1="41.4" y1="47.2" x2="26.2" y2="42.3"/></g></svg><div><h1>Champions League<small>2026/27</small></h1><p class="sub">Fixture oficial de la fase liga. Elegí arrancar con los resultados ya jugados (hasta el 4 de noviembre de 2026, jornada 4 completa) o simular todo desde cero.</p></div></header>
 <div id="app"></div>
-<p class="note">Con «resultados reales», los partidos marcados así son los jugados hasta la jornada 4 (fuente: UEFA.com); con «desde cero» se simula todo el fixture con los ratings base. Las barras de cada partido pendiente muestran la probabilidad de victoria local (azul), empate (gris) y victoria visitante (dorado), y en las eliminatorias la probabilidad de pasar. La pestaña «Probabilidades» juega 5.000 veces el resto del torneo desde el punto en que estás y cuenta cuántas veces cada equipo termina en el top 8, entra a cada ronda o sale campeón. Lo que no es real se simula: los goles salen de una distribución de Poisson según la fuerza de cada equipo, con localía incluida. La fuerza combina un rating tipo Elo aproximado (60%) con el coeficiente UEFA de los últimos 5 años (40%, solo para los 10 clubes con dato verificado) y se ajusta con los resultados reales de esta temporada. El nivel de goles está calibrado con la Champions reciente: 3,27 por partido en 2024/25, 3,47 en 2025/26 y más de 4 en el arranque de esta temporada; los partidos tienen además un «ritmo» aleatorio (más o menos abiertos), lo que genera goleadas y resultados altos como los reales. La tabla se desempata como en la UEFA: puntos, diferencia de gol, goles a favor, goles de visitante, victorias y victorias de visitante. Las eliminatorias siguen el formato oficial: los cruces del play-off y de octavos salen de pares de posiciones (9.º/10.º contra 23.º/24.º, 1.º/2.º contra los ganadores de 15.º/16.º–17.º/18.º, etc.) con un cuadro fijo hasta la final; el sorteo dentro de cada par se simula. Los penales se patean de a uno, con muerte súbita. Reiniciar vuelve a los datos reales.</p></div>
+<p class="note">Con «resultados reales», los partidos marcados así son los jugados hasta la jornada 4 (fuente: UEFA.com); con «desde cero» se simula todo el fixture con los ratings base. Las barras de cada partido pendiente muestran la probabilidad de victoria local (azul), empate (gris) y victoria visitante (dorado), y en las eliminatorias la probabilidad de pasar. La pestaña «Probabilidades» juega 5.000 veces el resto del torneo desde el punto en que estás; tocá un equipo para ver su distribución de puestos finales y su evolución jornada a jornada.<br><br><b>Cómo se simula.</b> Los goles salen de una distribución de Poisson según la fuerza de cada equipo, con un «ritmo» aleatorio por partido (más o menos abierto). La fuerza combina un rating tipo Elo aproximado (60%) con el coeficiente UEFA de los últimos 5 años (40%, solo para los 10 clubes con dato verificado) y se actualiza después de cada partido, real o simulado, como un Elo con margen de goles: un equipo en racha llega más fuerte a lo que sigue. El modelo está calibrado contra la Champions reciente: unos 3,5 goles por partido (ponderando 3,27 en 2024/25, 3,47 en 2025/26 y 4,04 en las primeras 4 jornadas de esta temporada), una localía de ~1,3 goles de local por cada gol visitante, 48% de victorias locales, ~19% de empates y ~13% de partidos con 4 o más goles de diferencia. La final es en cancha neutral. En las probabilidades, además, la fuerza real de cada equipo se sortea alrededor de su rating en cada simulación, porque nadie la conoce con exactitud; eso evita pronósticos demasiado seguros. Los minutos de los goles siguen la distribución real (más goles en el segundo tiempo y en el descuento).<br><br>La tabla se desempata como en la UEFA: puntos, diferencia de gol, goles a favor, goles de visitante, victorias y victorias de visitante. Las eliminatorias siguen el formato oficial: cruces por pares de posiciones (9.º/10.º contra 23.º/24.º, 1.º/2.º contra los ganadores de 15.º/16.º–17.º/18.º, etc.), cuadro fijo hasta la final y vuelta en casa del mejor ubicado en la fase liga; el sorteo dentro de cada par se simula. Los penales se patean de a uno, con muerte súbita. Reiniciar vuelve a los datos reales.</p></div>
 <script>
 // ---------- Datos ----------
 // [nombre, sigla, rating Elo aprox., id de escudo ESPN]
@@ -89,88 +113,123 @@ const FX=[
 `BOD:ATM GAL:FEY AEK:ROM AVL:BVB INT:LIV POR:SLA LIL:SLO RMA:LAS STU:BRU FEN:VIL SAB:NAP COM:PSG MUN:BAY RBL:SHA LEN:MCI BET:ARS SCP:BAR VIK:PSV`,
 `ARS:SAB ROM:LIL ATM:FEN BVB:AEK BRU:BOD BAY:BET BAR:COM SHA:RMA FEY:RBL LAS:POR LIV:LEN MCI:SCP PSG:GAL PSV:STU SLA:AVL NAP:VIK VIL:MUN SLO:INT`];
 const ST=['liga','playoff','r16','qf','sf','final','champ'],NM={liga:'Fase liga',playoff:'Play-off',r16:'Octavos',qf:'Cuartos',sf:'Semifinales',final:'Final',champ:'Campeón'};
-const KEY='ucl26v3',VER=3,NSIM=5000;
+const KEY='ucl26v4',VER=4,NSIM=5000;
 
 // ---------- Motor de simulación ----------
-const rnd=Math.random;let S,FAST=false;
+// Calibración (ver nota): local A_ y visitante B_ goles esperados entre iguales (cociente ~1,3),
+// neutral NB = media geométrica, SC = sensibilidad a la diferencia de rating, SG = dispersión del «ritmo» del partido.
+const A_=1.84,B_=1.41,NB=Math.sqrt(A_*B_),SC=470,SG=.27,ET=.3,HFA_E=60,K_E=20,SIG=50;
+const rnd=Math.random;let S,FAST=false,NZ=null;
+const gauss=()=>Math.sqrt(-2*Math.log(1-rnd()))*Math.cos(6.2832*rnd());
 const pois=l=>{const L=Math.exp(-l);let k=0,p=1;do{k++;p*=rnd()}while(p>L);return k-1};
-const mins=(n,lo,hi)=>Array.from({length:n},()=>lo+Math.floor(rnd()*(hi-lo+1))).sort((a,b)=>a-b);
-const mk=(h,a,n)=>({h,a,hg:0,ag:0,done:false,hm:[],am:[],n});
-const A_=1.8,B_=1.45,SC=600,SG=.25,HFA=40;
-const lam=(h,a,n)=>{const d=T[h][2]-T[a][2]+(n?0:HFA);return[A_*Math.exp(d/SC),B_*Math.exp(-d/SC)]};
-const opn=()=>Math.exp(SG*Math.sqrt(-2*Math.log(1-rnd()))*Math.cos(6.2832*rnd())-SG*SG/2);
-function play(m,et){const[x,y]=lam(m.h,m.a,m.n),o=opn(),f=et?.33:1,gh=pois(x*f*o),ga=pois(y*f*o);
- m.hg+=gh;m.ag+=ga;if(!FAST){const[lo,hi]=et?[91,120]:[1,90];m.hm.push(...mins(gh,lo,hi));m.am.push(...mins(ga,lo,hi))}}
+// Minuto de gol codificado como minuto*10+descuento (452 = 45+2'). ~45% en el primer tiempo; más goles hacia el final y en el descuento.
+const gmin=et=>et?(91+Math.floor(rnd()*30))*10:rnd()<.45?(rnd()<.07?451+Math.floor(rnd()*4):10*(1+Math.floor(45*Math.pow(rnd(),.93)))):(rnd()<.1?901+Math.floor(rnd()*6):10*(46+Math.floor(45*Math.pow(rnd(),.85))));
+const mins=(n,et)=>Array.from({length:n},()=>gmin(et)).sort((a,b)=>a-b);
+const fmin=v=>Math.floor(v/10)+(v%10?'+'+v%10:'')+"'";
+const mk=(h,a,n)=>({h,a,hg:0,ag:0,eh:0,ea:0,done:false,hm:[],am:[],n});
+const rt=i=>T[i][2]+(NZ?NZ[i]:0);
+const lam=(h,a,n)=>{const d=rt(h)-rt(a),e=Math.exp(d/SC);return n?[NB*e,NB/e]:[A_*e,B_/e]};
+const opn=()=>Math.exp(SG*gauss()-SG*SG/2);
+function play(m,et){const[x,y]=lam(m.h,m.a,m.n),o=opn(),f=et?ET:1,gh=pois(x*f*o),ga=pois(y*f*o);
+ m.hg+=gh;m.ag+=ga;if(et){m.eh+=gh;m.ea+=ga}if(!FAST){m.hm.push(...mins(gh,et));m.am.push(...mins(ga,et));m.hm.sort((a,b)=>a-b);m.am.sort((a,b)=>a-b)}}
+// Elo con margen de goles (sin contar la prórroga). Con NZ activo (simulaciones) modifica solo la copia de esa simulación.
+function elo(m){const d=rt(m.h)-rt(m.a)+(m.n?0:HFA_E),e=1/(1+Math.pow(10,-d/400)),g=(m.hg-m.eh)-(m.ag-m.ea),n=Math.abs(g),G=n<2?1:n==2?1.5:1.75+(n-3)/8,k=K_E*G*((g>0?1:g<0?0:.5)-e);
+ if(NZ){NZ[m.h]+=k;NZ[m.a]-=k}else{T[m.h][2]+=k;T[m.a][2]-=k}}
 function p1x2(h,a,n){const[x,y]=lam(h,a,n),f=[1];for(let i=1;i<15;i++)f[i]=f[i-1]*i;const P=(l,k)=>Math.exp(-l)*Math.pow(l,k)/f[k];let H=0,A=0,T3=0;
  for(const[z,w]of[[-1.2247,1/6],[0,2/3],[1.2247,1/6]]){const o=Math.exp(SG*z-SG*SG/2);for(let i=0;i<15;i++)for(let j=0;j<15;j++){const p=w*P(x*o,i)*P(y*o,j);T3+=p;if(i>j)H+=p;else if(i<j)A+=p}}
  H=Math.round(H/T3*100);A=Math.round(A/T3*100);return[H,100-H-A,A]}
-// Tanda de penales real: 5 por lado con corte anticipado y luego muerte súbita. Devuelve [goles a, goles b].
-function shootout(a,b){const d=(T[a][2]-T[b][2])/8000,p=[.76+d,.76-d],g=[0,0];
+// Tanda de penales: 5 por lado con corte anticipado y luego muerte súbita. Devuelve [goles a, goles b].
+function shootout(a,b){const d=(rt(a)-rt(b))/8000,p=[.76+d,.76-d],g=[0,0];
  for(let i=0;i<5;i++)for(let s=0;s<2;s++){if(rnd()<p[s])g[s]++;const la=4-i,lb=s?4-i:5-i;if(g[0]+la<g[1]||g[1]+lb<g[0])return g}
  while(g[0]==g[1]){if(rnd()<p[0])g[0]++;if(rnd()<p[1])g[1]++}
  return g}
-const simM=m=>{if(!m.done){play(m,0);m.done=true}};
+const simM=m=>{if(!m.done){play(m,0);m.done=true;elo(m)}};
 const mkTie=(a,b,one)=>({a,b,l:one?[mk(a,b,1)]:[mk(a,b),mk(b,a)]});
 function agg(t){let x=0,y=0;t.l.forEach(m=>{if(m.h==t.a){x+=m.hg;y+=m.ag}else{x+=m.ag;y+=m.hg}});return[x,y]}
 function simT(t){if(t.done)return;t.l.forEach(simM);let[x,y]=agg(t);
  if(x==y){play(t.l[t.l.length-1],1);t.et=1;[x,y]=agg(t)}
  if(x==y){t.pen=shootout(t.a,t.b);[x,y]=t.pen}
  t.w=x>y?t.a:t.b;t.done=true}
-// Probabilidad de pasar: simula la eliminatoria completa respetando lo ya jugado.
+const noise=()=>T.map(()=>SIG*gauss());
+// Probabilidad de pasar: simula la eliminatoria completa (respetando lo jugado) con fuerza incierta.
 function advP(t){const N=1500;let w=0;FAST=true;
- for(let i=0;i<N;i++){const c={a:t.a,b:t.b,l:t.l.map(m=>({...m}))};simT(c);if(c.w==t.a)w++}
- FAST=false;return Math.round(w/N*100)}
-// Tabla con desempates UEFA: pts, DG, GF, goles de visitante, victorias, victorias de visitante.
-function table(s){s=s||S;const r=T.map((_,i)=>({i,pj:0,w:0,d:0,l:0,gf:0,ga:0,agf:0,aw:0,pts:0}));
- for(const row of s.md)for(const m of row){if(!m.done)continue;const H=r[m.h],A=r[m.a];H.pj++;A.pj++;H.gf+=m.hg;H.ga+=m.ag;A.gf+=m.ag;A.ga+=m.hg;A.agf+=m.ag;
+ try{for(let i=0;i<N;i++){NZ=noise();const c={a:t.a,b:t.b,l:t.l.map(m=>({...m}))};simT(c);if(c.w==t.a)w++}}finally{NZ=null;FAST=false}
+ return Math.round(w/N*100)}
+// Tabla con desempates UEFA. upTo limita a las jornadas 0..upTo.
+function table(s=S,upTo=7){const r=T.map((_,i)=>({i,pj:0,w:0,d:0,l:0,gf:0,ga:0,agf:0,aw:0,pts:0}));
+ for(let d=0;d<=upTo;d++)for(const m of s.md[d]){if(!m.done)continue;const H=r[m.h],A=r[m.a];H.pj++;A.pj++;H.gf+=m.hg;H.ga+=m.ag;A.gf+=m.ag;A.ga+=m.hg;A.agf+=m.ag;
   if(m.hg>m.ag){H.pts+=3;H.w++;A.l++}else if(m.hg<m.ag){A.pts+=3;A.w++;A.aw++;H.l++}else{H.pts++;A.pts++;H.d++;A.d++}}
  return r.sort((a,b)=>b.pts-a.pts||(b.gf-b.ga)-(a.gf-a.ga)||b.gf-a.gf||b.agf-a.agf||b.w-a.w||b.aw-a.aw||T[b.i][2]-T[a.i][2])}
-function rate(){T.forEach((t,i)=>t[2]=B[i]);S.md.flat().filter(m=>m.real).forEach(m=>{const d=T[m.h][2]-T[m.a][2]+HFA,e=1/(1+Math.pow(10,-d/400)),g=m.hg-m.ag,n=Math.abs(g),G=n<2?1:n==2?1.5:1.75+(n-3)/8,k=20*G*((g>0?1:g<0?0:.5)-e);T[m.h][2]+=k;T[m.a][2]-=k})}
+// Ratings actuales = base + todos los partidos jugados (reales y simulados), en orden.
+function rate(){T.forEach((t,i)=>t[2]=B[i]);S.md.forEach(r=>r.forEach(m=>m.done&&elo(m)));ST.slice(1,6).forEach(k=>(S.ties[k]||[]).forEach(t=>t.l.forEach(m=>m.done&&elo(m))))}
 const nextDay=(s=S)=>s.md.findIndex(r=>r.some(m=>!m.done));
+const lastDay=(s=S)=>s.md.reduce((a,r,d)=>r.some(m=>m.done)?d:a,-1);
 const done=(s=S)=>s.st=='liga'?s.md.every(r=>r.every(m=>m.done)):s.ties[s.st].every(t=>t.done);
 function simStage(s=S){if(s.st=='liga')s.md.forEach(r=>r.forEach(simM));else s.ties[s.st].forEach(simT)}
 const sh=a=>rnd()<.5?a:[a[1],a[0]];
 // Avanza de ronda. Al cerrar la fase liga hace el sorteo con el formato oficial y deja el cuadro armado:
-// el orden de s.ties.playoff/r16 es el del cuadro (ganadores 2k y 2k+1 se cruzan en la ronda siguiente).
+// el orden de s.ties.* es el del cuadro (ganadores 2k y 2k+1 se cruzan en la ronda siguiente).
+// En cada eliminatoria, el mejor ubicado en la fase liga juega la vuelta de local.
 function adv(s=S){const st=s.st,i=ST.indexOf(st);
  if(st=='liga'){const t=table(s).map(x=>x.i);s.pos=t;s.ties.playoff=[];s.ko=[];
-  // grupo g: cabezas del play-off (9/10, 11/12, 13/14, 15/16), rivales (23/24, 21/22, 19/20, 17/18) y su cabeza de octavos (7/8, 5/6, 3/4, 1/2)
   const G=[0,1,2,3].map(g=>({s:sh([8+2*g,9+2*g]),u:sh([22-2*g,23-2*g]),r:sh([6-2*g,7-2*g])}));
   for(const h of[0,1])for(const g of[3,0,2,1]){const q=G[g];s.ties.playoff.push(mkTie(t[q.u[h]],t[q.s[h]]));s.ko.push(t[q.r[h]])}}
  else if(st=='playoff')s.ties.r16=s.ties.playoff.map((x,k)=>mkTie(x.w,s.ko[k]));
  else if(st=='final')s.ch=s.ties.final[0].w;
- else{const w=s.ties[st].map(x=>x.w),n=ST[i+1],a=[];for(let k=0;k<w.length;k+=2)a.push(mkTie(w[k],w[k+1],n=='final'));s.ties[n]=a}
+ else{const w=s.ties[st].map(x=>x.w),n=ST[i+1],a=[],p=x=>s.pos.indexOf(x);
+  for(let k=0;k<w.length;k+=2){const[x,y]=p(w[k])>p(w[k+1])?[w[k],w[k+1]]:[w[k+1],w[k]];a.push(mkTie(x,y,n=='final'))}s.ties[n]=a}
  s.st=ST[i+1];s.day=0}
 function simAll(s=S){while(s.st!='champ'){simStage(s);adv(s)}}
 function init(mo){mo=mo||(S&&S.mode)||'real';const me=S?S.me:-1,view=S&&S.view||'t';
- S={v:VER,mode:mo,md:FX.map(r=>r.split(' ').map(x=>{const[h,a,res]=x.split(':'),m=mk(C[h],C[a]);if(res&&mo=='real'){[m.hg,m.ag]=res.split('-').map(Number);m.done=m.real=true}return m})),st:'liga',day:0,ties:{},ko:[],pos:[],me,view};
+ S={v:VER,mode:mo,md:FX.map(r=>r.split(' ').map(x=>{const[h,a,res]=x.split(':'),m=mk(C[h],C[a]);if(res&&mo=='real'){[m.hg,m.ag]=res.split('-').map(Number);m.done=m.real=true}return m})),st:'liga',day:0,ties:{},ko:[],pos:[],me,view,sel:me};
  S.day=Math.max(0,nextDay());rate();render()}
 
 // ---------- Probabilidades (Monte Carlo) ----------
 let FC={sig:'',n:0,c:null,job:0};
 const sig=()=>JSON.stringify([S.md.map(r=>r.map(m=>m.done?m.hg+'-'+m.ag:'')),S.st,ST.slice(1,6).map(k=>(S.ties[k]||[]).map(t=>t.done?t.w:-1)),S.ko]);
-function tally(s){const c=FC.c;table(s).forEach((r,p)=>{c[r.i].pts+=r.pts;if(p<8)c[r.i].top8++;else if(p<24)c[r.i].po++});
+function tally(s){const c=FC.c;table(s).forEach((r,p)=>{const x=c[r.i];x.pts+=r.pts;x.pos[p]++;x.ph[Math.min(r.pts,24)]++;if(p<8)x.top8++;else if(p<24)x.po++});
  for(const[k,f]of[['r16','r16'],['qf','qf'],['sf','sf'],['final','fin']])s.ties[k].forEach(t=>{c[t.a][f]++;c[t.b][f]++});
  c[s.ch].ch++}
 function startFC(){const g=sig();if(FC.sig==g){drawFC();return}
  const job=FC.job+1,base=JSON.stringify(S,(k,v)=>k=='hm'||k=='am'?[]:v);
- FC={sig:g,n:0,job,c:T.map(()=>({pts:0,top8:0,po:0,r16:0,qf:0,sf:0,fin:0,ch:0}))};
- const step=()=>{if(job!=FC.job)return;FAST=true;try{for(let k=0;k<250&&FC.n<NSIM;k++){const s=JSON.parse(base);simAll(s);tally(s);FC.n++}}finally{FAST=false}
+ FC={sig:g,n:0,job,c:T.map(()=>({pts:0,top8:0,po:0,r16:0,qf:0,sf:0,fin:0,ch:0,pos:Array(36).fill(0),ph:Array(25).fill(0)}))};
+ const step=()=>{if(job!=FC.job)return;FAST=true;try{for(let k=0;k<200&&FC.n<NSIM;k++){NZ=noise();const s=JSON.parse(base);simAll(s);tally(s);FC.n++}}finally{FAST=false;NZ=null}
   drawFC();if(FC.n<NSIM)setTimeout(step,0)};
  setTimeout(step,0)}
-const KC=[['top8','Top 8'],['po','Play-off'],['r16','Octavos'],['qf','Cuartos'],['sf','Semis'],['fin','Final'],['ch','Campeón']];
+const KC=[['r16','Octavos'],['qf','Cuartos'],['sf','Semis'],['fin','Final'],['ch','Campeón']];
 const pct=p=>p<=0?'—':p<.005?'<1%':p>=.995&&p<1?'>99%':Math.round(p*100)+'%';
+const zc=p=>p<8?'var(--ok)':p<24?'var(--gold)':'var(--bad)';
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+// Histograma de puesto final (1–36) coloreado por zona.
+function histSVG(a,n){const W=360,H=110,bw=W/36,mx=Math.max(...a)||1;
+ return`<svg class="ch" viewBox="0 -4 ${W} ${H+22}" role="img" aria-label="Distribución de puesto final">${[0,8,24].map((p,j)=>`<rect x="${p*bw}" y="0" width="${[8,16,12][j]*bw}" height="${H}" fill="${zc(p)}" opacity=".06"/>`).join('')}${a.map((v,p)=>{const h=v/mx*(H-6);return v?`<rect x="${p*bw+1}" y="${H-h}" width="${bw-2}" height="${h}" rx="1.5" fill="${zc(p)}"><title>${p+1}.º: ${pct(v/n)}</title></rect>`:''}).join('')}<line x1="0" x2="${W}" y1="${H}" y2="${H}" stroke="#ffffff30"/>${[1,8,16,24,36].map(p=>`<text x="${(p-.5)*bw}" y="${H+14}" fill="#98a2cf" font-size="10" text-anchor="middle">${p}</text>`).join('')}</svg>`}
+// Línea de evolución del puesto, jornada a jornada, con las tres zonas de fondo.
+function evoSVG(i){const L=lastDay();if(L<0)return'<p class="k">Todavía no se jugó ninguna jornada.</p>';
+ const P=[];for(let d=0;d<=L;d++)P.push(table(S,d).findIndex(r=>r.i==i)+1);
+ const W=360,H=190,l=26,r=14,t=8,b=22,x=d=>l+d*(W-l-r)/7,y=p=>t+(p-.5)*(H-t-b)/36;
+ const band=(a,z,c)=>`<rect x="${l}" y="${y(a)}" width="${W-l-r}" height="${y(z+1)-y(a)}" fill="${c}" opacity=".08"/>`;
+ return`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución del puesto">${band(1,8,'#35d69a')}${band(9,24,'#f1c96b')}${band(25,36,'#ef5d73')}${[1,8,16,24,36].map(p=>`<text x="${l-6}" y="${y(p)+3.5}" fill="#98a2cf" font-size="10" text-anchor="end">${p}</text>`).join('')}${[...Array(8).keys()].map(d=>`<text x="${x(d)}" y="${H-5}" fill="#98a2cf" font-size="10" text-anchor="middle">J${d+1}</text>`).join('')}<polyline fill="none" stroke="#9aabff" stroke-width="2.5" stroke-linejoin="round" points="${P.map((p,d)=>x(d)+','+y(p)).join(' ')}"/>${P.map((p,d)=>`<circle cx="${x(d)}" cy="${y(p)}" r="${d==L?5:3.5}" fill="${zc(p-1)}" stroke="#0b1445" stroke-width="1.5"><title>J${d+1}: ${p}.º</title></circle>`).join('')}<text x="${x(L)+8}" y="${y(P[L])+4}" fill="#fff" font-size="12" font-weight="600">${P[L]}.º</text></svg>`}
+function teamPanel(i){const c=FC.c[i],n=FC.n,mp=c.pos.indexOf(Math.max(...c.pos));
+ let acc=0,lo=0,hi=24;for(let p=0;p<25;p++){acc+=c.ph[p];if(acc/n<.1)lo=p+1;if(acc/n>=.9){hi=p;break}}
+ const fun=[['Top 8',c.top8],['Octavos',c.r16],['Cuartos',c.qf],['Semis',c.sf],['Final',c.fin],['Campeón',c.ch]];
+ return`<div class="det"><div class="card"><h3>${cr(i)}${esc(T[i][0])}</h3><p class="k">Rating actual <b>${Math.round(T[i][2])}</b> · puntos esperados <b>${(c.pts/n).toFixed(1)}</b> (80% entre ${lo} y ${hi})</p><div class="fun" style="margin-top:10px">${fun.map(([k,v])=>`<div><span>${k}</span><s><u style="width:${(v/n*100).toFixed(1)}%"></u></s><span>${pct(v/n)}</span></div>`).join('')}</div></div>
+ <div class="card"><h4>Puesto final en la fase liga</h4>${histSVG(c.pos,n)}<p class="k">Más probable: <b>${mp+1}.º</b> (${pct(c.pos[mp]/n)})</p></div>
+ <div class="card"><h4>Puesto jornada a jornada</h4>${evoSVG(i)}</div></div>`}
 function drawFC(){const el=document.getElementById('fc');if(!el)return;const n=FC.n;
- if(!n){el.innerHTML='<div class="hd">Calculando…</div>';return}
- const c=FC.c,rows=T.map((_,i)=>i).sort((a,b)=>{const A=c[a],Z=c[b];return Z.ch-A.ch||Z.fin-A.fin||Z.sf-A.sf||Z.qf-A.qf||Z.r16-A.r16||Z.top8-A.top8||Z.pts-A.pts});
- el.innerHTML=`<div class="hd"><span>${S.st=='liga'?'Fase liga, playoff y cuadro sorteados en cada simulación':'Con el cuadro ya sorteado'} · desde el estado actual</span><span>${n.toLocaleString('es')}${n<NSIM?' / '+NSIM.toLocaleString('es')+' simulaciones…':' simulaciones'}</span></div>
- <table><tr><th>#<th style="text-align:left">Equipo<th>Pts prom.${KC.map(k=>`<th>${k[1]}`).join('')}</tr>${rows.map((i,p)=>`<tr class="${i==S.me?'me':''}"><td>${p+1}<td class="n">${cr(i)}${T[i][0]}<td>${(c[i].pts/n).toFixed(1)}${KC.map(([k])=>{const v=c[i][k]/n;return`<td class="v" style="background:rgba(241,201,107,${(v*.5).toFixed(3)})${v>.6?';color:#1a1400':''}">${pct(v)}`}).join('')}</tr>`).join('')}</table>`}
+ if(!n){el.innerHTML='<div class="card"><div class="hd">Calculando…</div></div>';return}
+ const c=FC.c,sel=S.sel>=0?S.sel:null,rows=T.map((_,i)=>i).sort((a,b)=>{const A=c[a],Z=c[b];return Z.ch-A.ch||Z.fin-A.fin||Z.sf-A.sf||Z.qf-A.qf||Z.r16-A.r16||Z.top8-A.top8||Z.pts-A.pts});
+ el.innerHTML=`${sel!=null?teamPanel(sel):''}<div class="card fc"><div class="hd"><span>${sel==null?'Tocá un equipo para ver su detalle · ':''}${S.st=='liga'?'resto de la fase liga, play-off y sorteo simulados':'con el cuadro ya sorteado'}</span><span>${n.toLocaleString('es')}${n<NSIM?' / '+NSIM.toLocaleString('es')+' simulaciones…':' simulaciones'}</span></div>
+ <div class="lg" style="margin:0 2px 8px"><span><i style="background:var(--ok)"></i>Top 8</span><span><i style="background:var(--gold)"></i>Play-off</span><span><i style="background:var(--bad)"></i>Eliminado</span></div>
+ <table><thead><tr><th>#<th style="text-align:left">Equipo<th>Pts<th style="text-align:left">Fase liga${KC.map(k=>`<th>${k[1]}`).join('')}</tr></thead><tbody>${rows.map((i,p)=>{const x=c[i],a=x.top8/n,b=x.po/n;return`<tr class="${i==S.me?'me ':''}${i==sel?'sel':''}" tabindex="0" onclick="S.sel=${i==sel?-1:i};saveS();drawFC()" onkeydown="if(event.key=='Enter')this.click()"><td>${p+1}<td class="n">${cr(i)}${esc(T[i][0])}<td>${(x.pts/n).toFixed(1)}<td><div class="zb" title="Top 8 ${pct(a)} · Play-off ${pct(b)} · Eliminado ${pct(1-a-b)}"><u style="width:${a*100}%;background:var(--ok)"></u><u style="width:${b*100}%;background:var(--gold)"></u><u style="width:${(1-a-b)*100}%;background:var(--bad)"></u></div>${KC.map(([k])=>{const v=x[k]/n;return`<td><div class="pb"><i style="width:${(v*100).toFixed(1)}%"></i><span>${pct(v)}</span></div>`}).join('')}</tr>`}).join('')}</tbody></table></div>`}
 
 // ---------- Interfaz ----------
 const hue=s=>[...s].reduce((a,c)=>a*31+c.charCodeAt(0),7)%360;
 const cr=i=>`<i class="c" style="background:hsl(${hue(T[i][0])} 55% 36%)">${T[i][1]}<img alt="" referrerpolicy="no-referrer" src="https://a.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F${T[i][3]}.png&w=96&h=96" onload="this.parentNode.style.background='#fff'" onerror="this.remove()"></i>`;
-const pr=m=>{const[H,D,A]=p1x2(m.h,m.a,m.n);return`<div class="pr" title="Local ${H}% · Empate ${D}% · Visita ${A}%"><div class="bar3"><u style="width:${H}%;background:var(--blue)"></u><u style="width:${D}%;background:#5b648f"></u><u style="width:${A}%;background:var(--gold)"></u></div><span>${H}%</span><span>${D}%</span><span>${A}%</span></div>`};
-const mr=(m,btn)=>`<div class="m${m.h==S.me||m.a==S.me?' me':''}"><span>${cr(m.h)}${T[m.h][0]}</span><b class="sc">${m.done?m.hg+' – '+m.ag:'vs'}</b><span class="r">${T[m.a][0]}${cr(m.a)}</span>${m.real?`<div class="gl"><span>Resultado real</span></div>`:m.done?`<div class="gl"><span>${m.hm.map(x=>x+"'").join(' ')}</span><span>${m.am.map(x=>x+"'").join(' ')}</span></div>`:pr(m)+(btn||'')}</div>`;
+const pr=m=>{const[H,D,A]=p1x2(m.h,m.a,m.n);return`<div class="pr" title="Local ${H}% · Empate ${D}% · Visita ${A}%"><div class="bar3"><u style="width:${H}%;background:var(--blue)"></u><u style="width:${D}%;background:var(--drw)"></u><u style="width:${A}%;background:var(--gold)"></u></div><span>${H}%</span><span>${D}%</span><span>${A}%</span></div>`};
+// Línea de tiempo del partido: goles locales arriba (azul), visitantes abajo (dorado).
+const tl=m=>{const all=m.hm.concat(m.am),D=all.some(v=>v>=910)?124:95,ps=v=>Math.min(99.5,(Math.floor(v/10)+(v%10)*.5)/D*100).toFixed(2);
+ return`<div class="tl" aria-hidden="true"><b style="left:${(45.5/D*100).toFixed(2)}%"></b>${D>95?`<b style="left:${(90.5/D*100).toFixed(2)}%"></b>`:''}${m.hm.map(v=>`<i class="h" style="left:${ps(v)}%" title="${fmin(v)}"></i>`).join('')}${m.am.map(v=>`<i class="a" style="left:${ps(v)}%" title="${fmin(v)}"></i>`).join('')}</div>`};
+const mr=(m,btn)=>`<div class="m${m.h==S.me||m.a==S.me?' me':''}"><span>${cr(m.h)}${T[m.h][0]}</span><b class="sc">${m.done?m.hg+' – '+m.ag:'vs'}</b><span class="r">${T[m.a][0]}${cr(m.a)}</span>${m.real?`<div class="gl"><span>Resultado real</span></div>`:m.done?(m.hg+m.ag?tl(m):'')+`<div class="gl"><span>${m.hm.map(fmin).join(' ')}</span><span>${m.am.map(fmin).join(' ')}</span></div>`:pr(m)+(btn||'')}</div>`;
 function tieCard(t,k,lbl){let r='';if(t.done){const[x,y]=agg(t);r=`<div class="res">${t.l.length>1?`Global ${x}–${y}`:''}${t.et?' · prórroga':''}${t.pen?` · penales ${t.pen[0]}–${t.pen[1]}`:''}<br>Pasa: <b>${T[t.w][0]}</b></div>`}
  if(!t.done&&t.pa==null)t.pa=advP(t);
  return`<div class="card">${lbl?`<div class="lbl">${lbl}</div>`:''}${t.done?'':`<div class="res" style="margin:0 0 4px;border:0">Pasa: ${T[t.a][1]} <b>${t.pa}%</b> · ${T[t.b][1]} <b>${100-t.pa}%</b></div>`}${t.l.map((m,j)=>mr(m,j?'':`<button onclick="simTie(${k})">Simular ${t.l.length>1?'eliminatoria':'final'}</button>`)).join('')}${r}</div>`}
@@ -184,19 +243,35 @@ function koView(s){const ts=S.ties[s],half=ts.length/2;let h='<div class="ties">
   const lbl=s=='playoff'?`Llave ${k+1} · el ganador va contra <b>${T[S.ko[k]][0]}</b> en octavos`:ts.length>1?`Llave ${k+1} · el ganador cruza con el de la llave ${(k^1)+1}`:'';
   h+=tieCard(t,k,lbl)});
  return h+'</div>'}
+// Cuadro visual de octavos a la final.
+function bracket(){if(S.st=='liga')return`<div class="card"><p class="sub" style="margin:0">El cuadro se arma con el sorteo, cuando termina la fase liga. Mientras tanto, en «Probabilidades» ves las chances de cada equipo de llegar a cada ronda.</p></div>`;
+ const R=['r16','qf','sf','final'],cols=[];let prev=null;
+ R.forEach((r,ri)=>{const sl=[];for(let k=0;k<8>>ri;k++){const t=S.ties[r]&&S.ties[r][k];let a,b,ta='',tb='';
+   if(t){a=t.a;b=t.b}else if(ri==0){const p=S.ties.playoff[k];a=p.done?p.w:null;ta=`${T[p.a][1]} / ${T[p.b][1]}`;b=S.ko[k]}
+   else{const x=prev[2*k],y=prev[2*k+1];a=x.w;b=y.w;ta=`Ganador ${NM[R[ri-1]].toLowerCase()} ${2*k+1}`;tb=`Ganador ${NM[R[ri-1]].toLowerCase()} ${2*k+2}`}
+   sl.push({t,a,b,ta,tb,w:t&&t.done?t.w:null})}cols.push(sl);prev=sl});
+ const row=(i,tbd,sc,w)=>i==null?`<div class="tbd"><em>${tbd||'Por definir'}</em></div>`:`<div class="${w==null?'':w==i?'w':'l'}${i==S.me?' me':''}">${cr(i)}<em>${esc(T[i][0])}</em>${sc!=null?`<b>${sc}</b>`:''}</div>`;
+ const node=x=>{let sa=null,sb=null,ex='';if(x.t&&x.t.done){[sa,sb]=agg(x.t);ex=x.t.pen?`Penales ${x.t.pen[0]}–${x.t.pen[1]}`:x.t.et?'Con prórroga':''}
+  return`<div class="nd">${row(x.a,x.ta,sa,x.w)}${row(x.b,x.tb,sb,x.w)}${ex?`<small>${ex}</small>`:''}</div>`};
+ const ch=S.ch!=null?S.ch:null;
+ return`<div class="card brw"><div class="br">${cols.map((c,ri)=>`<div class="col"><h4>${NM[R[ri]]}</h4><div class="in">${c.map(node).join('')}</div></div>`).join('')}<div class="col"><h4>Campeón</h4><div class="in"><div class="trophy"><div style="font-size:34px">🏆</div>${ch!=null?`${cr(ch)}<div style="font-weight:500">${esc(T[ch][0])}</div>`:'<div class="k">Por definir</div>'}</div></div></div></div></div>`}
+function leagueTable(){const tb=table(),L=lastDay(),prev=L>0?table(S,L-1).map(r=>r.i):null,F=T.map(()=>[]);
+ S.md.forEach((r,d)=>r.forEach(m=>{if(!m.done)return;const f=(i,o,x,y)=>F[i].push({r:x>y?'G':x<y?'P':'E',t:`J${d+1}: ${x}-${y} ${m.h==i?'vs':'en'} ${T[o][0]}`});f(m.h,m.a,m.hg,m.ag);f(m.a,m.h,m.ag,m.hg)}));
+ return`<div class="card"><table><tr><th>#<th style="text-align:left">Equipo<th>PJ<th class="hm">G<th class="hm">E<th class="hm">P<th class="hm">GF:GC<th>DG<th class="hm">Forma<th>PTS</tr>${tb.map((r,p)=>{const mv=prev?prev.indexOf(r.i)-p:0;
+  return`<tr class="${p<8?'q':p<24?'p':'e'}${r.i==S.me?' me':''}"><td>${p+1}${mv?`<span class="mv ${mv>0?'u':'d'}">${mv>0?'▲':'▼'}${Math.abs(mv)}</span>`:''}<td class="n">${cr(r.i)}${T[r.i][0]}<td>${r.pj}<td class="hm">${r.w}<td class="hm">${r.d}<td class="hm">${r.l}<td class="hm">${r.gf}:${r.ga}<td>${r.gf-r.ga>0?'+':''}${r.gf-r.ga}<td class="hm fm">${F[r.i].slice(-5).map(x=>`<i class="f${x.r}" title="${esc(x.t)}"></i>`).join('')}<td class="pt">${r.pts}</tr>`}).join('')}</table></div>`}
+function saveS(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function render(){const s=S.st,i=ST.indexOf(s),nd=nextDay();let h=`<div class="seg"><button class="${S.mode!='zero'?'on':''}" onclick="init('real')">Con resultados reales</button><button class="${S.mode=='zero'?'on':''}" onclick="init('zero')">Sin resultados (desde cero)</button></div><div class="steps">${ST.map((x,j)=>`<span class="${j==i?'on':j<i?'ok':''}">${NM[x]}</span>`).join('')}</div><div class="bar">`;
  if(s!='champ'){h+=s=='liga'?`<button onclick="simDay()" ${nd<0?'disabled':''}>${nd<0?'Jornadas completas':'Simular jornada '+(nd+1)}</button><button class="g" onclick="simStage();render()" ${nd<0?'disabled':''}>Simular fase liga</button>`:`<button onclick="simStage();render()" ${done()?'disabled':''}>Simular ronda</button>`;
   h+=`<button class="gold" onclick="adv();render()" ${done()?'':'disabled'}>${s=='final'?'Coronar campeón':'Avanzar a '+NM[ST[i+1]]}</button><button class="g" onclick="simAll();render()">Simular todo el torneo</button>`}
- h+=`<select class="pick" aria-label="Tu equipo" onchange="S.me=+this.value;render()"><option value="-1">Elegir mi equipo</option>${T.map((t,i)=>`<option value="${i}" ${i==S.me?'selected':''}>${t[0]}</option>`).join('')}</select><button class="g" onclick="init()">Reiniciar</button></div>${status()}`;
- h+=`<div class="tabs view"><button class="${S.view!='fc'?'on':''}" onclick="S.view='t';render()">Torneo</button><button class="${S.view=='fc'?'on':''}" onclick="S.view='fc';render()">Probabilidades</button></div>`;
- if(S.view=='fc')h+=`<div class="card fc" id="fc"></div>`;
- else if(s=='liga'){const tb=table();
-  h+=`<div class="grid"><div class="card"><table><tr><th>#<th style="text-align:left">Equipo<th>PJ<th class="hm">G<th class="hm">E<th class="hm">P<th class="hm">GF<th class="hm">GC<th>DG<th>PTS</tr>${tb.map((r,p)=>`<tr class="${p<8?'q':p<24?'p':'e'}${r.i==S.me?' me':''}"><td>${p+1}<td class="n">${cr(r.i)}${T[r.i][0]}<td>${r.pj}<td class="hm">${r.w}<td class="hm">${r.d}<td class="hm">${r.l}<td class="hm">${r.gf}<td class="hm">${r.ga}<td>${r.gf-r.ga>0?'+':''}${r.gf-r.ga}<td class="pt">${r.pts}</tr>`).join('')}</table></div>
-  <div class="card"><div class="tabs">${S.md.map((_,d)=>`<button class="${d==S.day?'on':''}" onclick="S.day=${d};render()">J${d+1}</button>`).join('')}</div>${S.md[S.day].map((m,k)=>mr(m,`<button class="g" onclick="simOne(${k})">Simular</button>`)).join('')}</div></div>
-  <p class="note">Verde: directo a octavos (1–8). Dorado: play-off (9–24). Rojo: eliminados (25–36).</p>`}
+ h+=`<select class="pick" aria-label="Tu equipo" onchange="S.me=+this.value;S.sel=S.me;render()"><option value="-1">Elegir mi equipo</option>${T.map((t,i)=>`<option value="${i}" ${i==S.me?'selected':''}>${t[0]}</option>`).join('')}</select><button class="g" onclick="init()">Reiniciar</button></div>${status()}`;
+ h+=`<div class="tabs view">${[['t','Torneo'],['br','Cuadro'],['fc','Probabilidades']].map(([k,n])=>`<button class="${(S.view||'t')==k?'on':''}" onclick="S.view='${k}';render()">${n}</button>`).join('')}</div>`;
+ if(S.view=='fc')h+=`<div id="fc"></div>`;
+ else if(S.view=='br')h+=bracket();
+ else if(s=='liga')h+=`<div class="grid">${leagueTable()}<div class="card"><div class="tabs">${S.md.map((_,d)=>`<button class="${d==S.day?'on':''}" onclick="S.day=${d};render()">J${d+1}</button>`).join('')}</div>${S.md[S.day].map((m,k)=>mr(m,`<button class="g" onclick="simOne(${k})">Simular</button>`)).join('')}</div></div>
+  <p class="note">Verde: directo a octavos (1–8). Dorado: play-off (9–24). Rojo: eliminados (25–36). Las flechas comparan con la jornada anterior; la forma muestra los últimos 5 partidos.</p>`;
  else if(s=='champ'){const f=S.ties.final[0];h+=`<div class="card champ"><div style="font-size:60px">🏆</div>${cr(S.ch)}<div class="big">${T[S.ch][0]}</div><div>Campeón de Europa 2026/27</div></div><div class="ties" style="margin-top:12px">${tieCard(f,0)}</div>`}
  else h+=koView(s);
- document.getElementById('app').innerHTML=h;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}
+ document.getElementById('app').innerHTML=h;saveS();
  if(S.view=='fc')startFC()}
 const simDay=()=>{const d=nextDay();if(d<0)return;S.day=d;S.md[d].forEach(simM);render()};
 const simOne=k=>{simM(S.md[S.day][k]);render()};
