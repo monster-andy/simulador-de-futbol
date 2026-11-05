@@ -2,101 +2,185 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1445">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060A1C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%BD%3C/text%3E%3C/svg%3E">
 <title>Simulador Champions League 2026/27</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@700;800;900&display=swap">
 <style>
-:root{--bg:#050a24;--bg2:#0b1445;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.1);--tx:#f2f4ff;--mut:#98a2cf;--blue:#4f6bff;--gold:#f1c96b;--ok:#35d69a;--bad:#ef5d73;--drw:#5b648f}
+:root{
+ --night:#060A1C;--ink:#0D1433;--ink2:#131C45;--line:#ffffff1c;--hair:#ffffff0e;
+ --chalk:#EEF1FF;--mut:#8E98C7;--dim:#5E6794;
+ --cyan:#3EE0FF;--gold:#F2C14E;--win:#2BE3A0;--out:#FF5C7A;--drw:#4E5785;
+ --fd:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;--fb:Archivo,system-ui,sans-serif;
+ --gut:16px}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:var(--tx);font:400 15px/1.45 Barlow,system-ui,sans-serif;background:radial-gradient(1000px 520px at 85% -8%,#2a3cb855,transparent 60%),radial-gradient(800px 480px at -10% 12%,#4a2a9a38,transparent 55%),linear-gradient(180deg,var(--bg2),var(--bg) 460px);background-color:var(--bg);background-attachment:fixed}
-h1,h2,h3,.sc,.big,td.pt{font-family:'Barlow Condensed',Impact,sans-serif;font-weight:700}
-.w{max-width:1120px;margin:0 auto;padding:18px 14px 64px}
-.hero{display:flex;align-items:center;gap:22px;padding:22px 26px;margin-bottom:18px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(115deg,#1a2a9a 0,#0d1850 52%,#080e30 100%);box-shadow:0 18px 50px #00000055}
-.hero svg{flex:none;width:96px;height:96px;filter:drop-shadow(0 0 16px #f1c96b66)}
-h1{font-size:clamp(34px,6vw,58px);line-height:.95;margin:0;letter-spacing:.5px}
-h1 small{display:block;font-size:.4em;color:var(--gold);margin-top:8px;letter-spacing:2px}
-.sub{color:var(--mut);margin:0 0 14px;max-width:62ch}.hero .sub{margin:10px 0 0}
-.steps{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
-.steps span{padding:7px 16px;border:1px solid var(--line);border-radius:99px;color:var(--mut);white-space:nowrap;background:var(--card)}
-.steps .ok{color:var(--tx);border-color:#35d69a55}.steps .ok::before{content:"✓ ";color:var(--ok)}
-.steps .on{background:var(--gold);border-color:var(--gold);color:#1a1400;font-weight:500}
-.seg{display:inline-flex;padding:4px;gap:4px;margin-bottom:14px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
-.seg button{background:transparent;box-shadow:none;color:var(--mut);padding:8px 14px}.seg .on{background:var(--gold);color:#1a1400}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-button{font:500 14px Barlow,sans-serif;background:linear-gradient(180deg,#5d78ff,#3b55e6);box-shadow:0 4px 14px #3a55e655;color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;transition:transform .12s,filter .12s}
-button:hover{filter:brightness(1.12);transform:translateY(-1px)}button:active{transform:none}
-button:focus-visible,select:focus-visible,tr:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-button.g{background:var(--card);box-shadow:none;border:1px solid var(--line)}
-button.gold{background:linear-gradient(180deg,#f7d98a,#e6b84e);color:#1a1400;box-shadow:0 4px 16px #f1c96b44}
-button:disabled{opacity:.35;cursor:default;transform:none;filter:none}
-.pick{background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:inherit}.pick option{background:#0b1445}
-.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:start}
-@media(max-width:820px){.grid{grid-template-columns:1fr}.hero{padding:16px}.hero svg{width:64px;height:64px}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;backdrop-filter:blur(6px)}
-table{width:100%;border-collapse:collapse}th{color:var(--mut);font-weight:500;font-size:13px;text-align:center;padding:4px 4px 8px}
-td{padding:7px 4px;text-align:center;border-top:1px solid rgba(255,255,255,.06);font-variant-numeric:tabular-nums}td.n{text-align:left;font-weight:500;white-space:nowrap}
-td:first-child{border-left:3px solid transparent;color:var(--mut);width:34px;white-space:nowrap}
-tr.q td:first-child{border-color:var(--ok)}tr.p td:first-child{border-color:var(--gold)}tr.e td:first-child{border-color:var(--bad)}
-td.pt{font-size:20px;color:var(--gold)}
-.mv{display:block;font-size:9.5px;line-height:1}.mv.u{color:var(--ok)}.mv.d{color:var(--bad)}
-.fm{white-space:nowrap}.fm i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 1.5px;vertical-align:middle}.fG{background:var(--ok)}.fE{background:var(--drw)}.fP{background:var(--bad)}
-@media(max-width:520px){.hm{display:none}}
-.c{position:relative;overflow:hidden;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;font:700 10px 'Barlow Condensed',sans-serif;font-style:normal;color:#fff;margin:0 9px 0 0;vertical-align:middle;border:1px solid #ffffff40;box-shadow:0 2px 6px #0006;flex:none}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--chalk);font:400 15px/1.5 var(--fb);font-variant-numeric:tabular-nums;background:var(--night) radial-gradient(900px 420px at 100% 0,#1B2A7A55,transparent 70%) no-repeat}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;border-radius:6px}
+.page{max-width:1180px;margin:0 auto;padding:0 var(--gut) 40px}
+/* Cabecera */
+.top{display:flex;align-items:flex-end;gap:14px;padding:26px 0 18px}
+.top svg{flex:none;width:52px;height:52px}
+h1{font:900 clamp(40px,9.5vw,92px)/.84 var(--fd);margin:0;letter-spacing:.2px}
+.top p{margin:16px 0 0;color:var(--mut);font-size:14px}
+/* Riel de temporada */
+.rail{display:grid;grid-template-columns:8fr 7fr;gap:14px;margin:4px 0 6px}
+.grp p{margin:0 0 6px;font-size:12.5px;color:var(--mut)}
+.segs{display:flex;gap:3px}
+.sg{flex:1;min-width:0}
+.sg i{display:block;height:12px;border-radius:3px;background:var(--ink2);border:1px solid var(--hair)}
+.sg.part i{background:linear-gradient(90deg,var(--cyan) 50%,var(--ink2) 50%)}
+.sg.done i{background:var(--cyan);border-color:transparent}
+.sg.next i{background:repeating-linear-gradient(-45deg,#3EE0FF55 0 4px,transparent 4px 8px);border-color:var(--cyan)}
+.sg span{display:block;margin-top:5px;font:700 13px/1 var(--fd);color:var(--dim);text-align:center;white-space:nowrap;overflow:hidden}
+.sg.done span,.sg.part span{color:var(--mut)}.sg.next span{color:var(--cyan)}
+.sg .s2{display:none}
+.stl{margin:12px 0 0;font-size:15px}.stl b{font-weight:600}
+.me-st{margin:4px 0 0;color:var(--gold);font-size:14px}
+/* Partida */
+.cfg{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 0}
+.seg{display:inline-flex;padding:3px;border-radius:10px;background:var(--ink);border:1px solid var(--line)}
+.seg button{border:0;background:none;padding:7px 12px;border-radius:7px;color:var(--mut);cursor:pointer;font-size:14px}
+.seg button.on{background:var(--chalk);color:var(--night);font-weight:600}
+.pick{background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px;min-width:0}.pick option{background:var(--ink)}
+.ghost{background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:14px;cursor:pointer;color:var(--mut)}
+.ghost:hover{color:var(--chalk);border-color:#ffffff40}
+/* Acciones */
+.act{display:grid;grid-template-columns:auto auto auto;justify-content:start;gap:8px;margin:16px 0 0}
+.pri,.sec{border-radius:12px;padding:12px 18px;cursor:pointer;font-weight:600;font-size:15px;white-space:nowrap;transition:filter .12s}
+.pri{background:var(--cyan);color:#04121A;border:0}
+.pri.adv{background:var(--gold);color:#1E1400}
+.sec{background:var(--ink);border:1px solid var(--line);color:var(--chalk);font-weight:500}
+.pri:hover,.sec:hover{filter:brightness(1.1)}
+button:disabled{opacity:.35;cursor:default;filter:none}
+/* Vistas */
+.views{position:sticky;top:0;z-index:6;display:flex;gap:22px;margin:22px calc(-1*var(--gut)) 16px;padding:0 var(--gut);background:var(--night);border-bottom:1px solid var(--line)}
+.views button{background:none;border:0;padding:14px 0 12px;cursor:pointer;color:var(--mut);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.views button.on{color:var(--chalk);border-color:var(--cyan)}
+.pnl{background:var(--ink);border:1px solid var(--hair);border-radius:14px;padding:14px}
+.pnl h2{font:800 24px/1 var(--fd);margin:2px 0 12px;letter-spacing:.3px}
+.cols{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:start}
+.sw{display:none}
+/* Tabla */
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{color:var(--dim);font-weight:500;font-size:12.5px;padding:0 4px 8px;text-align:center}
+td{padding:7px 4px;text-align:center;border-top:1px solid var(--hair);font-size:14px}
+.lt col.c1{width:40px}.lt col.cs{width:34px}.lt col.cg{width:56px}.lt col.cf{width:78px}.lt col.cp{width:44px}
+td.ps{text-align:left;color:var(--mut);border-left:3px solid transparent;padding-left:7px;white-space:nowrap}
+tr.q td.ps{border-left-color:var(--win)}tr.p td.ps{border-left-color:var(--gold)}tr.e td.ps{border-left-color:var(--out)}
+tr.cut8 td,tr.cut24 td{border-top:1px solid #ffffff38}
+td.tn{text-align:left}.tn div{display:flex;align-items:center;gap:9px;min-width:0}.tn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+td.pt{font:800 22px/1 var(--fd);color:var(--gold)}
+.mv{font-size:10px;margin-left:3px}.mv.u{color:var(--win)}.mv.d{color:var(--out)}
+.fm{white-space:nowrap}.fm i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 1.5px;vertical-align:middle}.fG{background:var(--win)}.fE{background:var(--drw)}.fP{background:var(--out)}
+tr.me td{background:#3EE0FF14}tr.me td.tn span{color:#fff}
+.key{display:flex;flex-wrap:wrap;gap:6px 14px;margin:12px 2px 0;font-size:12.5px;color:var(--mut)}.key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* Escudo */
+.c{position:relative;overflow:hidden;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font:700 9.5px var(--fb);font-style:normal;color:#fff;flex:none;box-shadow:0 0 0 1px #ffffff2a}
 .c img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:3px;background:#fff}
-tr.me,.m.me{background:linear-gradient(90deg,#4f6bff33,transparent)}tr.me td.n,.m.me .sc{color:#fff}
-.tabs{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}.tabs button{padding:6px 12px;background:transparent;box-shadow:none;border:1px solid var(--line);color:var(--mut)}
-.tabs .on{background:var(--blue);color:#fff;border-color:var(--blue)}
-.tabs.view{margin-bottom:14px}.tabs.view button{padding:8px 16px}
-.m{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:11px 6px;border-top:1px solid rgba(255,255,255,.07);border-radius:10px}
-.m:first-of-type{border-top:0}.m>span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}.m .r{text-align:right}.m .r .c{margin:0 0 0 9px}
-.sc{font-size:26px;min-width:76px;text-align:center;color:var(--gold);background:#0006;border:1px solid var(--line);border-radius:10px;padding:1px 10px;line-height:1.3}
-.m button{grid-column:1/-1;justify-self:center;padding:5px 16px;font-size:13px}
-.gl{grid-column:1/-1;display:flex;justify-content:space-between;gap:10px;color:var(--mut);font-size:12px}.gl span:last-child{text-align:right}
-.tl{grid-column:1/-1;position:relative;height:22px;margin:0 6px}
-.tl::before{content:"";position:absolute;left:0;right:0;top:10px;height:2px;background:var(--line);border-radius:2px}
-.tl b{position:absolute;top:6px;width:1px;height:10px;background:#ffffff38}
-.tl i{position:absolute;width:9px;height:9px;border-radius:50%;margin-left:-4.5px;border:1px solid #0009}.tl i.h{top:0;background:var(--blue)}.tl i.a{top:13px;background:var(--gold)}
-.pr{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;font-size:12px;color:var(--mut)}
-.bar3{grid-column:1/-1;display:flex;height:6px;border-radius:4px;overflow:hidden;margin-bottom:3px;background:var(--line);gap:2px}.bar3 u{display:block;height:100%}
-.pr span:nth-child(3){text-align:center}.pr span:nth-child(4){text-align:right}
-.ties{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
-.half{grid-column:1/-1;margin:6px 0 -4px;color:var(--gold);font:700 18px 'Barlow Condensed',sans-serif;letter-spacing:1px}
-.lbl{color:var(--mut);font-size:12px;text-align:center;margin-bottom:2px}.lbl b{color:var(--tx);font-weight:500}
-.res{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);text-align:center;color:var(--mut);font-size:13px}.res b{color:var(--ok)}
-.champ{text-align:center;padding:44px 14px;border-color:#f1c96b66;background:radial-gradient(520px 240px at 50% 0,#f1c96b30,transparent 70%),var(--card)}
-.big{font-size:clamp(40px,8vw,76px);line-height:1;margin:14px 0;color:var(--gold)}.champ .c{width:76px;height:76px;font-size:22px;margin:0}
+/* Jornadas */
+.chips{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:0 0 6px}
+.chips button{flex:none;min-width:40px;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 8px;cursor:pointer;color:var(--mut);font:700 15px/1 var(--fd)}
+.chips button.dn{color:var(--chalk)}.chips button.on{background:var(--chalk);color:var(--night);border-color:var(--chalk)}
+/* Partido (marcador) */
+.mt{padding:12px 2px;border-top:1px solid var(--hair)}.mt:first-of-type{border-top:0}
+.mt.me{background:linear-gradient(90deg,#3EE0FF14,transparent);border-radius:10px;padding-left:8px;padding-right:8px}
+.tm{display:flex;align-items:center;gap:10px;min-height:34px}
+.tm .nmw{flex:1;min-width:0;display:flex;flex-direction:column}
+.tm .nm{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tm small{color:var(--mut);font-size:12px;line-height:1.3}
+.tm .gs{font:800 28px/1 var(--fd);min-width:30px;text-align:right}
+.tm .pp{font-style:normal;font-size:13px;color:var(--mut);min-width:42px;text-align:right}
+.tm.w .nm{color:#fff;font-weight:600}.tm.w .gs{color:var(--gold)}.tm.l{opacity:.6}
+.ft{display:flex;align-items:center;gap:10px;margin:6px 0 0 38px;font-size:12.5px;color:var(--mut)}
+.ft .b3{flex:1;display:flex;height:6px;border-radius:3px;overflow:hidden;gap:2px;min-width:60px}.b3 u{display:block;height:100%}
+.ft .tag{border:1px solid var(--line);border-radius:6px;padding:1px 7px}
+.ft .sim{background:none;border:1px solid var(--line);border-radius:8px;padding:5px 12px;cursor:pointer;color:var(--chalk);font-size:13px}
+.ft .sim:hover{border-color:var(--cyan)}
+.tl{position:relative;height:20px;margin:6px 0 0 38px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--line);border-radius:2px}
+.tl b{position:absolute;top:4px;width:1px;height:12px;background:#ffffff3a}
+.tl i{position:absolute;width:9px;height:9px;border-radius:50%;margin-left:-4.5px}.tl i.h{top:0;background:var(--cyan)}.tl i.a{top:11px;background:var(--gold)}
+/* Eliminatorias */
+.ties{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.side{grid-column:1/-1;margin:10px 0 -2px;font:800 22px/1 var(--fd)}
+.tie{background:var(--ink);border:1px solid var(--hair);border-radius:14px;padding:12px 14px}
+.tie .th{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--mut);margin-bottom:8px}.tie .th b{color:var(--chalk);font-weight:500}
+.tr{display:grid;align-items:center;gap:8px;min-height:36px}.tr.hd{min-height:0;font-size:11.5px;color:var(--dim)}
+.tr .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.tr .v{text-align:center;font:700 19px/1 var(--fd)}.tr .v.g{color:var(--gold);font-size:24px}.tr.hd .v{font:500 11.5px var(--fb)}
+.tr.w .nm{color:#fff;font-weight:600}.tr.l{opacity:.55}.tr.me{background:#3EE0FF14;border-radius:8px}
+.tr .pa{text-align:right;font-size:13px;color:var(--mut)}.tr .pa b{color:var(--chalk);font-weight:600}
+.tf{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--hair);font-size:13.5px;color:var(--mut)}.tf b{color:var(--win);font-weight:600}
+.tf .sim{background:var(--cyan);color:#04121A;border:0;border-radius:9px;padding:7px 14px;font-weight:600;cursor:pointer}
+/* Campeón */
+.win{text-align:center;padding:30px 16px 26px;border-radius:18px;background:radial-gradient(420px 220px at 50% 0,#F2C14E2e,transparent 70%),var(--ink);border:1px solid #F2C14E44}
+.win svg{display:block;width:96px;height:auto;margin:0 auto}.win .c{display:grid;width:64px;height:64px;font-size:18px;margin:12px auto 0}
+.win h2{font:900 clamp(46px,11vw,104px)/.9 var(--fd);margin:12px 0 6px;color:var(--gold)}
+.win p{margin:0;color:var(--mut)}
+@keyframes rise{from{transform:translateY(16px) scale(.94);opacity:0}to{transform:none;opacity:1}}
+.win>*{animation:rise .6s cubic-bezier(.2,1.2,.4,1) both}.win>:nth-child(2){animation-delay:.08s}.win>:nth-child(3){animation-delay:.16s}.win>:nth-child(4){animation-delay:.24s}
 /* Probabilidades */
-.fc{overflow-x:auto}.fc table{min-width:760px}.fc td{font-size:13.5px;padding:6px 4px}.fc tbody tr{cursor:pointer}.fc tbody tr:hover{background:#ffffff08}.fc tr.sel{background:#f1c96b1c}
-.fc .hd{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;color:var(--mut);font-size:13px;margin:0 2px 10px}
-.zb{display:flex;height:12px;border-radius:6px;overflow:hidden;min-width:130px;background:#ffffff0d}.zb u{display:block;height:100%}
-.pb{position:relative;height:22px;border-radius:6px;background:#ffffff0b;overflow:hidden;min-width:58px}.pb i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#f1c96b40,#f1c96bbb)}.pb span{position:relative;line-height:22px;font-size:12.5px}
-.lg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mut)}.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.det{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:14px}
-@media(max-width:900px){.det{grid-template-columns:1fr}}
-.det h3{font-size:24px;margin:0 0 2px;display:flex;align-items:center}.det h4{margin:0 0 6px;font:600 13px Barlow,sans-serif;color:var(--mut);text-transform:uppercase;letter-spacing:.8px}
-.k{color:var(--mut);font-size:12.5px;margin:6px 0 0}.k b{color:var(--tx);font-weight:500}
-.fun div{display:grid;grid-template-columns:72px 1fr 46px;align-items:center;gap:8px;font-size:13px;margin:5px 0}.fun s{display:block;height:10px;border-radius:5px;background:#ffffff10;overflow:hidden;text-decoration:none}.fun s u{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--blue),#9aabff)}.fun span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.fc table{table-layout:auto}.fc td{font-size:13.5px;padding:6px 4px}.fc tbody tr{cursor:pointer}.fc tbody tr:hover td{background:#ffffff07}.fc tr.sel td{background:#F2C14E1a}
+.fch{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 14px;color:var(--mut);font-size:13px;margin:0 2px 12px}
+.zb{display:flex;height:12px;border-radius:6px;overflow:hidden;min-width:110px;background:#ffffff0d}.zb u{display:block;height:100%}
+.pb{position:relative;height:22px;border-radius:6px;background:#ffffff0b;overflow:hidden;min-width:54px}.pb i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#3EE0FF30,#3EE0FFa0)}.pb span{position:relative;line-height:22px;font-size:12.5px}
+.det{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.det h3{font:800 28px/1 var(--fd);margin:0 0 6px;display:flex;align-items:center;gap:10px}.det h4{margin:0 0 8px;font-size:14px;font-weight:600}
+.kk{color:var(--mut);font-size:13px;margin:8px 0 0}.kk b{color:var(--chalk);font-weight:600}
+.fun div{display:grid;grid-template-columns:70px 1fr 44px;align-items:center;gap:8px;font-size:13px;margin:6px 0}.fun s{display:block;height:10px;border-radius:5px;background:#ffffff10;overflow:hidden;text-decoration:none}.fun s u{display:block;height:100%;border-radius:5px;background:var(--cyan)}.fun span:last-child{text-align:right}
 .ch{width:100%;height:auto;display:block;overflow:visible}
 /* Cuadro */
-.brw{overflow-x:auto;padding-bottom:6px}.br{display:grid;grid-template-columns:repeat(4,minmax(165px,1fr)) minmax(140px,.8fr);gap:14px;min-width:860px}
-.br .col{display:flex;flex-direction:column}.br h4{margin:0 0 8px;text-align:center;color:var(--mut);font:600 15px 'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.brw{overflow-x:auto}.br{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.8fr);gap:14px;min-width:880px}
+.br .col{display:flex;flex-direction:column}.br h3{margin:0 0 10px;text-align:center;font:800 20px/1 var(--fd);color:var(--mut)}
 .br .in{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:10px}
-.nd{border:1px solid var(--line);border-radius:10px;background:#ffffff08;overflow:hidden}.nd>div{display:flex;align-items:center;gap:7px;padding:5px 8px;font-size:13px;min-height:31px}.nd>div+div{border-top:1px solid #ffffff12}
-.nd .c{width:20px;height:20px;font-size:7px;margin:0;box-shadow:none}.nd em{flex:1;min-width:0;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nd b{font:700 15px 'Barlow Condensed',sans-serif;color:var(--gold)}
-.nd .w em{color:#fff;font-weight:500}.nd .l{opacity:.45}.nd .me{background:#4f6bff33}.nd .tbd em{color:var(--mut);font-style:italic}.nd small{display:block;text-align:center;color:var(--mut);font-size:11px;padding:2px 4px;border-top:1px solid #ffffff12}
-.trophy{text-align:center;border:1px solid #f1c96b66;border-radius:14px;padding:16px 8px;background:radial-gradient(160px 90px at 50% 0,#f1c96b30,transparent 70%)}.trophy .c{width:46px;height:46px;font-size:13px;margin:6px 0}
-@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
-.champ>div:first-child{animation:pop .7s cubic-bezier(.2,1.4,.4,1)}
-@media(prefers-reduced-motion:reduce){.champ>div:first-child{animation:none}button{transition:none}}
-.note{color:var(--mut);font-size:12.5px;margin-top:28px;max-width:80ch}
+.nd{border:1px solid var(--line);border-radius:10px;background:var(--ink);overflow:hidden}.nd>div{display:flex;align-items:center;gap:8px;padding:6px 9px;font-size:13.5px;min-height:34px}.nd>div+div{border-top:1px solid var(--hair)}
+.nd .c{width:20px;height:20px;font-size:7px}.nd em{flex:1;min-width:0;font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nd b{font:800 17px/1 var(--fd);color:var(--gold)}
+.nd .w em{color:#fff;font-weight:600}.nd .l{opacity:.45}.nd .me{background:#3EE0FF1a}.nd .tbd em{color:var(--dim)}.nd small{display:block;text-align:center;color:var(--mut);font-size:11px;padding:3px 4px;border-top:1px solid var(--hair)}
+.cup{text-align:center;border:1px solid #F2C14E55;border-radius:14px;padding:18px 8px;background:radial-gradient(160px 90px at 50% 0,#F2C14E26,transparent 70%),var(--ink)}.cup svg{width:44px}.cup .c{width:44px;height:44px;font-size:12px;margin:8px auto 4px}.cup div{font-weight:600}
+.empty{color:var(--mut);margin:0}
+.note{color:var(--mut);font-size:13px;line-height:1.55;margin:36px 0 0;max-width:78ch}.note b{color:var(--chalk);font-weight:600}
+/* ---------- Celular ---------- */
+@media (max-width:820px){
+ .cols{grid-template-columns:1fr}
+ .sw{display:flex;margin:0 0 12px}.sw button{flex:1}
+ .lgv.t .mts,.lgv.p .tbl{display:none}
+ .det{grid-template-columns:1fr}
+ .br{grid-template-columns:1fr;min-width:0;gap:20px}.br .in{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.br .col.f .in,.br .col.k .in{grid-template-columns:1fr}
+ .brw{overflow:visible}
+}
+@media (max-width:640px){
+ :root{--gut:14px}
+ .top{padding:20px 0 14px}.top svg{width:40px;height:40px}
+ .rail{grid-template-columns:8fr 6fr;gap:10px}.sg .s1{display:none}.sg .s2{display:block}.sg span{font-size:12px}
+ .hm{display:none}
+ .lt col.c1{width:34px}.lt col.cp{width:38px}
+ .pnl{padding:12px 10px;border-radius:12px}
+ .cfg .seg{flex:1 1 100%}.cfg .seg button{flex:1}.cfg .pick{flex:1}
+ .page{padding-bottom:96px}
+ .act{position:fixed;left:0;right:0;bottom:0;z-index:7;margin:0;padding:10px var(--gut) calc(10px + env(safe-area-inset-bottom));grid-template-columns:1.5fr 1fr 1fr;background:#060A1Ceb;backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+ .act.two{grid-template-columns:1.6fr 1fr}.act.one{grid-template-columns:1fr}
+ .pri,.sec{padding:12px 8px;font-size:14px;white-space:normal;line-height:1.15}
+ .views{gap:18px}
+ .ties{grid-template-columns:1fr}
+ .fc .x{display:none}.zb{min-width:0}.pb{min-width:0}
+ .fc table{table-layout:fixed}.fc td,.fc th{padding-left:3px;padding-right:3px}.fc td.tn span{font-size:13.5px}
+ .fc col.c0{width:26px}.fc col.cz{width:26%}.fc col.ck{width:52px}
+ .ft{margin-left:38px}
+}
+@media (prefers-reduced-motion:reduce){.win>*{animation:none}.pri,.sec{transition:none}}
 </style>
 </head>
 <body>
-<div class="w"><header class="hero"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#f1c96b"><polygon points="50.0,6.8 51.4,10.1 54.9,10.4 52.2,12.7 53.1,16.2 50.0,14.3 46.9,16.2 47.8,12.7 45.1,10.4 48.6,10.1"/><polygon points="76.9,17.9 78.2,21.2 81.8,21.5 79.1,23.9 79.9,27.3 76.9,25.5 73.8,27.3 74.6,23.9 71.9,21.5 75.5,21.2"/><polygon points="88.0,44.8 89.4,48.1 92.9,48.4 90.2,50.7 91.1,54.2 88.0,52.3 84.9,54.2 85.8,50.7 83.1,48.4 86.6,48.1"/><polygon points="76.9,71.7 78.2,75.0 81.8,75.3 79.1,77.6 79.9,81.1 76.9,79.2 73.8,81.1 74.6,77.6 71.9,75.3 75.5,75.0"/><polygon points="50.0,82.8 51.4,86.1 54.9,86.4 52.2,88.7 53.1,92.2 50.0,90.3 46.9,92.2 47.8,88.7 45.1,86.4 48.6,86.1"/><polygon points="23.1,71.7 24.5,75.0 28.1,75.3 25.4,77.6 26.2,81.1 23.1,79.2 20.1,81.1 20.9,77.6 18.2,75.3 21.8,75.0"/><polygon points="12.0,44.8 13.4,48.1 16.9,48.4 14.2,50.7 15.1,54.2 12.0,52.3 8.9,54.2 9.8,50.7 7.1,48.4 10.6,48.1"/><polygon points="23.1,17.9 24.5,21.2 28.1,21.5 25.4,23.9 26.2,27.3 23.1,25.5 20.1,27.3 20.9,23.9 18.2,21.5 21.8,21.2"/></g><circle cx="50" cy="50" r="26" fill="#f4f6ff"/><g fill="#0b1445"><polygon points="50.0,41.0 58.6,47.2 55.3,57.3 44.7,57.3 41.4,47.2"/></g><g stroke="#0b1445" stroke-width="1.6" stroke-linecap="round"><line x1="50.0" y1="41.0" x2="50.0" y2="25.0"/><line x1="58.6" y1="47.2" x2="73.8" y2="42.3"/><line x1="55.3" y1="57.3" x2="64.7" y2="70.2"/><line x1="44.7" y1="57.3" x2="35.3" y2="70.2"/><line x1="41.4" y1="47.2" x2="26.2" y2="42.3"/></g></svg><div><h1>Champions League<small>2026/27</small></h1><p class="sub">Fixture oficial de la fase liga. Elegí arrancar con los resultados ya jugados (hasta el 4 de noviembre de 2026, jornada 4 completa) o simular todo desde cero.</p></div></header>
+<div class="page">
+<header class="top"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="#F2C14E"><polygon points="50.0,6.8 51.4,10.1 54.9,10.4 52.2,12.7 53.1,16.2 50.0,14.3 46.9,16.2 47.8,12.7 45.1,10.4 48.6,10.1"/><polygon points="76.9,17.9 78.2,21.2 81.8,21.5 79.1,23.9 79.9,27.3 76.9,25.5 73.8,27.3 74.6,23.9 71.9,21.5 75.5,21.2"/><polygon points="88.0,44.8 89.4,48.1 92.9,48.4 90.2,50.7 91.1,54.2 88.0,52.3 84.9,54.2 85.8,50.7 83.1,48.4 86.6,48.1"/><polygon points="76.9,71.7 78.2,75.0 81.8,75.3 79.1,77.6 79.9,81.1 76.9,79.2 73.8,81.1 74.6,77.6 71.9,75.3 75.5,75.0"/><polygon points="50.0,82.8 51.4,86.1 54.9,86.4 52.2,88.7 53.1,92.2 50.0,90.3 46.9,92.2 47.8,88.7 45.1,86.4 48.6,86.1"/><polygon points="23.1,71.7 24.5,75.0 28.1,75.3 25.4,77.6 26.2,81.1 23.1,79.2 20.1,81.1 20.9,77.6 18.2,75.3 21.8,75.0"/><polygon points="12.0,44.8 13.4,48.1 16.9,48.4 14.2,50.7 15.1,54.2 12.0,52.3 8.9,54.2 9.8,50.7 7.1,48.4 10.6,48.1"/><polygon points="23.1,17.9 24.5,21.2 28.1,21.5 25.4,23.9 26.2,27.3 23.1,25.5 20.1,27.3 20.9,23.9 18.2,21.5 21.8,21.2"/></g><circle cx="50" cy="50" r="26" fill="#EEF1FF"/><g fill="#060A1C"><polygon points="50.0,41.0 58.6,47.2 55.3,57.3 44.7,57.3 41.4,47.2"/></g><g stroke="#060A1C" stroke-width="1.6" stroke-linecap="round"><line x1="50.0" y1="41.0" x2="50.0" y2="25.0"/><line x1="58.6" y1="47.2" x2="73.8" y2="42.3"/><line x1="55.3" y1="57.3" x2="64.7" y2="70.2"/><line x1="44.7" y1="57.3" x2="35.3" y2="70.2"/><line x1="41.4" y1="47.2" x2="26.2" y2="42.3"/></g></svg>
+<div><h1>Champions League 2026/27</h1><p>Simulador de la fase liga y las eliminatorias, con los resultados reales hasta el 4 de noviembre.</p></div></header>
 <div id="app"></div>
-<p class="note">Con «resultados reales», los partidos marcados así son los jugados hasta la jornada 4 (fuente: UEFA.com); con «desde cero» se simula todo el fixture con los ratings base. Las barras de cada partido pendiente muestran la probabilidad de victoria local (azul), empate (gris) y victoria visitante (dorado), y en las eliminatorias la probabilidad de pasar. La pestaña «Probabilidades» juega 5.000 veces el resto del torneo desde el punto en que estás; tocá un equipo para ver su distribución de puestos finales y su evolución jornada a jornada.<br><br><b>Cómo se simula.</b> Los goles salen de una distribución de Poisson según la fuerza de cada equipo, con un «ritmo» aleatorio por partido (más o menos abierto). La fuerza combina un rating tipo Elo aproximado (60%) con el coeficiente UEFA de los últimos 5 años (40%, solo para los 10 clubes con dato verificado) y se actualiza después de cada partido, real o simulado, como un Elo con margen de goles: un equipo en racha llega más fuerte a lo que sigue. El modelo está calibrado contra la Champions reciente: unos 3,5 goles por partido (ponderando 3,27 en 2024/25, 3,47 en 2025/26 y 4,04 en las primeras 4 jornadas de esta temporada), una localía de ~1,3 goles de local por cada gol visitante, 48% de victorias locales, ~19% de empates y ~13% de partidos con 4 o más goles de diferencia. La final es en cancha neutral. En las probabilidades, además, la fuerza real de cada equipo se sortea alrededor de su rating en cada simulación, porque nadie la conoce con exactitud; eso evita pronósticos demasiado seguros. Los minutos de los goles siguen la distribución real (más goles en el segundo tiempo y en el descuento).<br><br>La tabla se desempata como en la UEFA: puntos, diferencia de gol, goles a favor, goles de visitante, victorias y victorias de visitante. Las eliminatorias siguen el formato oficial: cruces por pares de posiciones (9.º/10.º contra 23.º/24.º, 1.º/2.º contra los ganadores de 15.º/16.º–17.º/18.º, etc.), cuadro fijo hasta la final y vuelta en casa del mejor ubicado en la fase liga; el sorteo dentro de cada par se simula. Los penales se patean de a uno, con muerte súbita. Reiniciar vuelve a los datos reales.</p></div>
+<p class="note">Con «resultados reales», los partidos marcados así son los jugados hasta la jornada 4 (fuente: UEFA.com); con «desde cero» se simula todo el fixture con los ratings base. En cada partido pendiente, el porcentaje al lado de cada equipo es su probabilidad de ganar, y la barra muestra local (cian), empate (gris) y visitante (dorado); en las eliminatorias, la probabilidad de pasar. La pestaña «Probabilidades» juega 5.000 veces el resto del torneo desde el punto en que estás; tocá un equipo para ver su distribución de puestos finales y su evolución jornada a jornada.<br><br><b>Cómo se simula.</b> Los goles salen de una distribución de Poisson según la fuerza de cada equipo, con un «ritmo» aleatorio por partido (más o menos abierto). La fuerza combina un rating tipo Elo aproximado (60%) con el coeficiente UEFA de los últimos 5 años (40%, solo para los 10 clubes con dato verificado) y se actualiza después de cada partido, real o simulado, como un Elo con margen de goles: un equipo en racha llega más fuerte a lo que sigue. El modelo está calibrado contra la Champions reciente: unos 3,5 goles por partido (ponderando 3,27 en 2024/25, 3,47 en 2025/26 y 4,04 en las primeras 4 jornadas de esta temporada), una localía de ~1,3 goles de local por cada gol visitante, 48% de victorias locales, ~19% de empates y ~13% de partidos con 4 o más goles de diferencia. Las eliminatorias son más cerradas (unos 3 goles por partido), y si la ida dejó la serie liquidada por 3 o más goles, la vuelta se juega con menos intensidad, como pasa en la realidad. La final es en cancha neutral. En las probabilidades, además, la fuerza real de cada equipo se sortea alrededor de su rating en cada simulación, porque nadie la conoce con exactitud; eso evita pronósticos demasiado seguros. Los minutos de los goles siguen la distribución real (más goles en el segundo tiempo y en el descuento).<br><br>La tabla se desempata como en la UEFA: puntos, diferencia de gol, goles a favor, goles de visitante, victorias y victorias de visitante. Las eliminatorias siguen el formato oficial: cruces por pares de posiciones (9.º/10.º contra 23.º/24.º, 1.º/2.º contra los ganadores de 15.º/16.º–17.º/18.º, etc.), cuadro fijo hasta la final y vuelta en casa del mejor ubicado en la fase liga; el sorteo dentro de cada par se simula. Los penales se patean de a uno, con muerte súbita. Reiniciar vuelve a los datos reales.</p>
+</div>
 <script>
 // ---------- Datos ----------
 // [nombre, sigla, rating Elo aprox., id de escudo ESPN]
@@ -118,7 +202,8 @@ const KEY='ucl26v4',VER=4,NSIM=5000;
 // ---------- Motor de simulación ----------
 // Calibración (ver nota): local A_ y visitante B_ goles esperados entre iguales (cociente ~1,3),
 // neutral NB = media geométrica, SC = sensibilidad a la diferencia de rating, SG = dispersión del «ritmo» del partido.
-const A_=1.84,B_=1.41,NB=Math.sqrt(A_*B_),SC=470,SG=.27,ET=.3,HFA_E=60,K_E=20,SIG=50;
+const A_=1.84,B_=1.41,NB=Math.sqrt(A_*B_),SC=470,SG=.27,ET=.3,HFA_E=60,K_E=20,SIG=50,KOF=.88,DEAD=.8;
+// KOF: las eliminatorias son más cerradas (~3,1 goles por partido). DEAD: vuelta con la serie liquidada (3+ goles de ventaja en la ida).
 const rnd=Math.random;let S,FAST=false,NZ=null;
 const gauss=()=>Math.sqrt(-2*Math.log(1-rnd()))*Math.cos(6.2832*rnd());
 const pois=l=>{const L=Math.exp(-l);let k=0,p=1;do{k++;p*=rnd()}while(p>L);return k-1};
@@ -126,16 +211,17 @@ const pois=l=>{const L=Math.exp(-l);let k=0,p=1;do{k++;p*=rnd()}while(p>L);retur
 const gmin=et=>et?(91+Math.floor(rnd()*30))*10:rnd()<.45?(rnd()<.07?451+Math.floor(rnd()*4):10*(1+Math.floor(45*Math.pow(rnd(),.93)))):(rnd()<.1?901+Math.floor(rnd()*6):10*(46+Math.floor(45*Math.pow(rnd(),.85))));
 const mins=(n,et)=>Array.from({length:n},()=>gmin(et)).sort((a,b)=>a-b);
 const fmin=v=>Math.floor(v/10)+(v%10?'+'+v%10:'')+"'";
-const mk=(h,a,n)=>({h,a,hg:0,ag:0,eh:0,ea:0,done:false,hm:[],am:[],n});
+const mk=(h,a,n,ko)=>({h,a,hg:0,ag:0,eh:0,ea:0,done:false,hm:[],am:[],n,ko:ko?1:0});
+const fac=m=>(m.ko?KOF:1)*(m.dead?DEAD:1);
 const rt=i=>T[i][2]+(NZ?NZ[i]:0);
 const lam=(h,a,n)=>{const d=rt(h)-rt(a),e=Math.exp(d/SC);return n?[NB*e,NB/e]:[A_*e,B_/e]};
 const opn=()=>Math.exp(SG*gauss()-SG*SG/2);
-function play(m,et){const[x,y]=lam(m.h,m.a,m.n),o=opn(),f=et?ET:1,gh=pois(x*f*o),ga=pois(y*f*o);
+function play(m,et){const[x,y]=lam(m.h,m.a,m.n),o=opn(),f=(et?ET:1)*fac(m),gh=pois(x*f*o),ga=pois(y*f*o);
  m.hg+=gh;m.ag+=ga;if(et){m.eh+=gh;m.ea+=ga}if(!FAST){m.hm.push(...mins(gh,et));m.am.push(...mins(ga,et));m.hm.sort((a,b)=>a-b);m.am.sort((a,b)=>a-b)}}
 // Elo con margen de goles (sin contar la prórroga). Con NZ activo (simulaciones) modifica solo la copia de esa simulación.
 function elo(m){const d=rt(m.h)-rt(m.a)+(m.n?0:HFA_E),e=1/(1+Math.pow(10,-d/400)),g=(m.hg-m.eh)-(m.ag-m.ea),n=Math.abs(g),G=n<2?1:n==2?1.5:1.75+(n-3)/8,k=K_E*G*((g>0?1:g<0?0:.5)-e);
  if(NZ){NZ[m.h]+=k;NZ[m.a]-=k}else{T[m.h][2]+=k;T[m.a][2]-=k}}
-function p1x2(h,a,n){const[x,y]=lam(h,a,n),f=[1];for(let i=1;i<15;i++)f[i]=f[i-1]*i;const P=(l,k)=>Math.exp(-l)*Math.pow(l,k)/f[k];let H=0,A=0,T3=0;
+function p1x2(m){const[x0,y0]=lam(m.h,m.a,m.n),q=fac(m),x=x0*q,y=y0*q,f=[1];for(let i=1;i<15;i++)f[i]=f[i-1]*i;const P=(l,k)=>Math.exp(-l)*Math.pow(l,k)/f[k];let H=0,A=0,T3=0;
  for(const[z,w]of[[-1.2247,1/6],[0,2/3],[1.2247,1/6]]){const o=Math.exp(SG*z-SG*SG/2);for(let i=0;i<15;i++)for(let j=0;j<15;j++){const p=w*P(x*o,i)*P(y*o,j);T3+=p;if(i>j)H+=p;else if(i<j)A+=p}}
  H=Math.round(H/T3*100);A=Math.round(A/T3*100);return[H,100-H-A,A]}
 // Tanda de penales: 5 por lado con corte anticipado y luego muerte súbita. Devuelve [goles a, goles b].
@@ -144,9 +230,9 @@ function shootout(a,b){const d=(rt(a)-rt(b))/8000,p=[.76+d,.76-d],g=[0,0];
  while(g[0]==g[1]){if(rnd()<p[0])g[0]++;if(rnd()<p[1])g[1]++}
  return g}
 const simM=m=>{if(!m.done){play(m,0);m.done=true;elo(m)}};
-const mkTie=(a,b,one)=>({a,b,l:one?[mk(a,b,1)]:[mk(a,b),mk(b,a)]});
+const mkTie=(a,b,one)=>({a,b,l:one?[mk(a,b,1,1)]:[mk(a,b,0,1),mk(b,a,0,1)]});
 function agg(t){let x=0,y=0;t.l.forEach(m=>{if(m.h==t.a){x+=m.hg;y+=m.ag}else{x+=m.ag;y+=m.hg}});return[x,y]}
-function simT(t){if(t.done)return;t.l.forEach(simM);let[x,y]=agg(t);
+function simT(t){if(t.done)return;simM(t.l[0]);if(t.l[1]){const[x0,y0]=agg(t);if(!t.l[1].done&&Math.abs(x0-y0)>=3)t.l[1].dead=1;simM(t.l[1])}let[x,y]=agg(t);
  if(x==y){play(t.l[t.l.length-1],1);t.et=1;[x,y]=agg(t)}
  if(x==y){t.pen=shootout(t.a,t.b);[x,y]=t.pen}
  t.w=x>y?t.a:t.b;t.done=true}
@@ -180,8 +266,8 @@ function adv(s=S){const st=s.st,i=ST.indexOf(st);
   for(let k=0;k<w.length;k+=2){const[x,y]=p(w[k])>p(w[k+1])?[w[k],w[k+1]]:[w[k+1],w[k]];a.push(mkTie(x,y,n=='final'))}s.ties[n]=a}
  s.st=ST[i+1];s.day=0}
 function simAll(s=S){while(s.st!='champ'){simStage(s);adv(s)}}
-function init(mo){mo=mo||(S&&S.mode)||'real';const me=S?S.me:-1,view=S&&S.view||'t';
- S={v:VER,mode:mo,md:FX.map(r=>r.split(' ').map(x=>{const[h,a,res]=x.split(':'),m=mk(C[h],C[a]);if(res&&mo=='real'){[m.hg,m.ag]=res.split('-').map(Number);m.done=m.real=true}return m})),st:'liga',day:0,ties:{},ko:[],pos:[],me,view,sel:me};
+function init(mo){mo=mo||(S&&S.mode)||'real';const me=S?S.me:-1,view=S&&S.view||'t',lv=S&&S.lv||'t';
+ S={v:VER,mode:mo,md:FX.map(r=>r.split(' ').map(x=>{const[h,a,res]=x.split(':'),m=mk(C[h],C[a]);if(res&&mo=='real'){[m.hg,m.ag]=res.split('-').map(Number);m.done=m.real=true}return m})),st:'liga',day:0,ties:{},ko:[],pos:[],me,view,lv,sel:me};
  S.day=Math.max(0,nextDay());rate();render()}
 
 // ---------- Probabilidades (Monte Carlo) ----------
@@ -196,83 +282,108 @@ function startFC(){const g=sig();if(FC.sig==g){drawFC();return}
  const step=()=>{if(job!=FC.job)return;FAST=true;try{for(let k=0;k<200&&FC.n<NSIM;k++){NZ=noise();const s=JSON.parse(base);simAll(s);tally(s);FC.n++}}finally{FAST=false;NZ=null}
   drawFC();if(FC.n<NSIM)setTimeout(step,0)};
  setTimeout(step,0)}
-const KC=[['r16','Octavos'],['qf','Cuartos'],['sf','Semis'],['fin','Final'],['ch','Campeón']];
+// [clave, título, ocultar en celular]
+const KC=[['r16','Octavos',0],['qf','Cuartos',1],['sf','Semis',1],['fin','Final',1],['ch','Campeón',0]];
 const pct=p=>p<=0?'—':p<.005?'<1%':p>=.995&&p<1?'>99%':Math.round(p*100)+'%';
-const zc=p=>p<8?'var(--ok)':p<24?'var(--gold)':'var(--bad)';
+const zc=p=>p<8?'#2BE3A0':p<24?'#F2C14E':'#FF5C7A';
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
 // Histograma de puesto final (1–36) coloreado por zona.
 function histSVG(a,n){const W=360,H=110,bw=W/36,mx=Math.max(...a)||1;
- return`<svg class="ch" viewBox="0 -4 ${W} ${H+22}" role="img" aria-label="Distribución de puesto final">${[0,8,24].map((p,j)=>`<rect x="${p*bw}" y="0" width="${[8,16,12][j]*bw}" height="${H}" fill="${zc(p)}" opacity=".06"/>`).join('')}${a.map((v,p)=>{const h=v/mx*(H-6);return v?`<rect x="${p*bw+1}" y="${H-h}" width="${bw-2}" height="${h}" rx="1.5" fill="${zc(p)}"><title>${p+1}.º: ${pct(v/n)}</title></rect>`:''}).join('')}<line x1="0" x2="${W}" y1="${H}" y2="${H}" stroke="#ffffff30"/>${[1,8,16,24,36].map(p=>`<text x="${(p-.5)*bw}" y="${H+14}" fill="#98a2cf" font-size="10" text-anchor="middle">${p}</text>`).join('')}</svg>`}
+ return`<svg class="ch" viewBox="0 -4 ${W} ${H+22}" role="img" aria-label="Distribución de puesto final">${[0,8,24].map((p,j)=>`<rect x="${p*bw}" y="0" width="${[8,16,12][j]*bw}" height="${H}" fill="${zc(p)}" opacity=".06"/>`).join('')}${a.map((v,p)=>{const h=v/mx*(H-6);return v?`<rect x="${p*bw+1}" y="${H-h}" width="${bw-2}" height="${h}" rx="1.5" fill="${zc(p)}"><title>${p+1}.º: ${pct(v/n)}</title></rect>`:''}).join('')}<line x1="0" x2="${W}" y1="${H}" y2="${H}" stroke="#ffffff30"/>${[1,8,16,24,36].map(p=>`<text x="${(p-.5)*bw}" y="${H+14}" fill="#8E98C7" font-size="10" text-anchor="middle">${p}</text>`).join('')}</svg>`}
 // Línea de evolución del puesto, jornada a jornada, con las tres zonas de fondo.
-function evoSVG(i){const L=lastDay();if(L<0)return'<p class="k">Todavía no se jugó ninguna jornada.</p>';
+function evoSVG(i){const L=lastDay();if(L<0)return'<p class="kk">Todavía no se jugó ninguna jornada.</p>';
  const P=[];for(let d=0;d<=L;d++)P.push(table(S,d).findIndex(r=>r.i==i)+1);
  const W=360,H=190,l=26,r=14,t=8,b=22,x=d=>l+d*(W-l-r)/7,y=p=>t+(p-.5)*(H-t-b)/36;
  const band=(a,z,c)=>`<rect x="${l}" y="${y(a)}" width="${W-l-r}" height="${y(z+1)-y(a)}" fill="${c}" opacity=".08"/>`;
- return`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución del puesto">${band(1,8,'#35d69a')}${band(9,24,'#f1c96b')}${band(25,36,'#ef5d73')}${[1,8,16,24,36].map(p=>`<text x="${l-6}" y="${y(p)+3.5}" fill="#98a2cf" font-size="10" text-anchor="end">${p}</text>`).join('')}${[...Array(8).keys()].map(d=>`<text x="${x(d)}" y="${H-5}" fill="#98a2cf" font-size="10" text-anchor="middle">J${d+1}</text>`).join('')}<polyline fill="none" stroke="#9aabff" stroke-width="2.5" stroke-linejoin="round" points="${P.map((p,d)=>x(d)+','+y(p)).join(' ')}"/>${P.map((p,d)=>`<circle cx="${x(d)}" cy="${y(p)}" r="${d==L?5:3.5}" fill="${zc(p-1)}" stroke="#0b1445" stroke-width="1.5"><title>J${d+1}: ${p}.º</title></circle>`).join('')}<text x="${x(L)+8}" y="${y(P[L])+4}" fill="#fff" font-size="12" font-weight="600">${P[L]}.º</text></svg>`}
+ return`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución del puesto">${band(1,8,'#2BE3A0')}${band(9,24,'#F2C14E')}${band(25,36,'#FF5C7A')}${[1,8,16,24,36].map(p=>`<text x="${l-6}" y="${y(p)+3.5}" fill="#8E98C7" font-size="10" text-anchor="end">${p}</text>`).join('')}${[...Array(8).keys()].map(d=>`<text x="${x(d)}" y="${H-5}" fill="#8E98C7" font-size="10" text-anchor="middle">J${d+1}</text>`).join('')}<polyline fill="none" stroke="#3EE0FF" stroke-width="2.5" stroke-linejoin="round" points="${P.map((p,d)=>x(d)+','+y(p)).join(' ')}"/>${P.map((p,d)=>`<circle cx="${x(d)}" cy="${y(p)}" r="${d==L?5:3.5}" fill="${zc(p-1)}" stroke="#0D1433" stroke-width="1.5"><title>J${d+1}: ${p}.º</title></circle>`).join('')}<text x="${x(L)+8}" y="${y(P[L])+4}" fill="#fff" font-size="12" font-weight="600">${P[L]}.º</text></svg>`}
 function teamPanel(i){const c=FC.c[i],n=FC.n,mp=c.pos.indexOf(Math.max(...c.pos));
  let acc=0,lo=0,hi=24;for(let p=0;p<25;p++){acc+=c.ph[p];if(acc/n<.1)lo=p+1;if(acc/n>=.9){hi=p;break}}
  const fun=[['Top 8',c.top8],['Octavos',c.r16],['Cuartos',c.qf],['Semis',c.sf],['Final',c.fin],['Campeón',c.ch]];
- return`<div class="det"><div class="card"><h3>${cr(i)}${esc(T[i][0])}</h3><p class="k">Rating actual <b>${Math.round(T[i][2])}</b> · puntos esperados <b>${(c.pts/n).toFixed(1)}</b> (80% entre ${lo} y ${hi})</p><div class="fun" style="margin-top:10px">${fun.map(([k,v])=>`<div><span>${k}</span><s><u style="width:${(v/n*100).toFixed(1)}%"></u></s><span>${pct(v/n)}</span></div>`).join('')}</div></div>
- <div class="card"><h4>Puesto final en la fase liga</h4>${histSVG(c.pos,n)}<p class="k">Más probable: <b>${mp+1}.º</b> (${pct(c.pos[mp]/n)})</p></div>
- <div class="card"><h4>Puesto jornada a jornada</h4>${evoSVG(i)}</div></div>`}
+ return`<div class="det"><div class="pnl"><h3>${cr(i)}${esc(T[i][0])}</h3><p class="kk">Rating actual <b>${Math.round(T[i][2])}</b>. Puntos esperados <b>${(c.pts/n).toFixed(1)}</b>, con 80% de chances de quedar entre ${lo} y ${hi}.</p><div class="fun" style="margin-top:12px">${fun.map(([k,v])=>`<div><span>${k}</span><s><u style="width:${(v/n*100).toFixed(1)}%"></u></s><span>${pct(v/n)}</span></div>`).join('')}</div></div>
+ <div class="pnl"><h4>Puesto final en la fase liga</h4>${histSVG(c.pos,n)}<p class="kk">Lo más probable: <b>${mp+1}.º</b> (${pct(c.pos[mp]/n)})</p></div>
+ <div class="pnl"><h4>Puesto jornada a jornada</h4>${evoSVG(i)}</div></div>`}
 function drawFC(){const el=document.getElementById('fc');if(!el)return;const n=FC.n;
- if(!n){el.innerHTML='<div class="card"><div class="hd">Calculando…</div></div>';return}
+ if(!n){el.innerHTML='<div class="pnl"><p class="empty">Calculando…</p></div>';return}
  const c=FC.c,sel=S.sel>=0?S.sel:null,rows=T.map((_,i)=>i).sort((a,b)=>{const A=c[a],Z=c[b];return Z.ch-A.ch||Z.fin-A.fin||Z.sf-A.sf||Z.qf-A.qf||Z.r16-A.r16||Z.top8-A.top8||Z.pts-A.pts});
- el.innerHTML=`${sel!=null?teamPanel(sel):''}<div class="card fc"><div class="hd"><span>${sel==null?'Tocá un equipo para ver su detalle · ':''}${S.st=='liga'?'resto de la fase liga, play-off y sorteo simulados':'con el cuadro ya sorteado'}</span><span>${n.toLocaleString('es')}${n<NSIM?' / '+NSIM.toLocaleString('es')+' simulaciones…':' simulaciones'}</span></div>
- <div class="lg" style="margin:0 2px 8px"><span><i style="background:var(--ok)"></i>Top 8</span><span><i style="background:var(--gold)"></i>Play-off</span><span><i style="background:var(--bad)"></i>Eliminado</span></div>
- <table><thead><tr><th>#<th style="text-align:left">Equipo<th>Pts<th style="text-align:left">Fase liga${KC.map(k=>`<th>${k[1]}`).join('')}</tr></thead><tbody>${rows.map((i,p)=>{const x=c[i],a=x.top8/n,b=x.po/n;return`<tr class="${i==S.me?'me ':''}${i==sel?'sel':''}" tabindex="0" onclick="S.sel=${i==sel?-1:i};saveS();drawFC()" onkeydown="if(event.key=='Enter')this.click()"><td>${p+1}<td class="n">${cr(i)}${esc(T[i][0])}<td>${(x.pts/n).toFixed(1)}<td><div class="zb" title="Top 8 ${pct(a)} · Play-off ${pct(b)} · Eliminado ${pct(1-a-b)}"><u style="width:${a*100}%;background:var(--ok)"></u><u style="width:${b*100}%;background:var(--gold)"></u><u style="width:${(1-a-b)*100}%;background:var(--bad)"></u></div>${KC.map(([k])=>{const v=x[k]/n;return`<td><div class="pb"><i style="width:${(v*100).toFixed(1)}%"></i><span>${pct(v)}</span></div>`}).join('')}</tr>`}).join('')}</tbody></table></div>`}
+ el.innerHTML=`${sel!=null?teamPanel(sel):''}<div class="pnl fc"><div class="fch"><span>${sel==null?'Tocá un equipo para ver su detalle. ':''}${S.st=='liga'?'Se simulan el resto de la fase liga, el sorteo y las eliminatorias.':'El cuadro ya está sorteado.'}</span><span>${n.toLocaleString('es')}${n<NSIM?' de '+NSIM.toLocaleString('es')+' simulaciones…':' simulaciones'}</span></div>
+ <table><colgroup><col class="c0" style="width:34px"><col><col class="hm" style="width:46px"><col class="cz" style="width:24%">${KC.map(k=>`<col class="ck${k[2]?' x':''}">`).join('')}</colgroup><thead><tr><th>#<th style="text-align:left">Equipo<th class="hm">Pts<th style="text-align:left">Fase liga${KC.map(k=>`<th${k[2]?' class="x"':''}>${k[1]}`).join('')}</tr></thead><tbody>${rows.map((i,p)=>{const x=c[i],a=x.top8/n,b=x.po/n;return`<tr class="${i==S.me?'me ':''}${i==sel?'sel':''}" tabindex="0" onclick="S.sel=${i==sel?-1:i};saveS();drawFC();if(S.sel>=0)document.getElementById('fc').scrollIntoView({behavior:'smooth',block:'start'})" onkeydown="if(event.key=='Enter')this.click()"><td>${p+1}<td class="tn"><div>${cr(i)}<span>${esc(T[i][0])}</span></div><td class="hm">${(x.pts/n).toFixed(1)}<td><div class="zb" title="Top 8 ${pct(a)}, play-off ${pct(b)}, eliminado ${pct(1-a-b)}"><u style="width:${a*100}%;background:var(--win)"></u><u style="width:${b*100}%;background:var(--gold)"></u><u style="width:${(1-a-b)*100}%;background:var(--out)"></u></div>${KC.map(([k,,h])=>{const v=x[k]/n;return`<td${h?' class="x"':''}><div class="pb"><i style="width:${(v*100).toFixed(1)}%"></i><span>${pct(v)}</span></div>`}).join('')}</tr>`}).join('')}</tbody></table>
+ <div class="key"><span><i style="background:var(--win)"></i>Top 8</span><span><i style="background:var(--gold)"></i>Play-off</span><span><i style="background:var(--out)"></i>Eliminado</span></div></div>`}
 
 // ---------- Interfaz ----------
 const hue=s=>[...s].reduce((a,c)=>a*31+c.charCodeAt(0),7)%360;
-const cr=i=>`<i class="c" style="background:hsl(${hue(T[i][0])} 55% 36%)">${T[i][1]}<img alt="" referrerpolicy="no-referrer" src="https://a.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F${T[i][3]}.png&w=96&h=96" onload="this.parentNode.style.background='#fff'" onerror="this.remove()"></i>`;
-const pr=m=>{const[H,D,A]=p1x2(m.h,m.a,m.n);return`<div class="pr" title="Local ${H}% · Empate ${D}% · Visita ${A}%"><div class="bar3"><u style="width:${H}%;background:var(--blue)"></u><u style="width:${D}%;background:var(--drw)"></u><u style="width:${A}%;background:var(--gold)"></u></div><span>${H}%</span><span>${D}%</span><span>${A}%</span></div>`};
-// Línea de tiempo del partido: goles locales arriba (azul), visitantes abajo (dorado).
+const cr=i=>`<i class="c" style="background:hsl(${hue(T[i][0])} 50% 34%)">${T[i][1]}<img alt="" loading="lazy" referrerpolicy="no-referrer" src="https://a.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F${T[i][3]}.png&w=96&h=96" onload="this.parentNode.style.background='#fff'" onerror="this.remove()"></i>`;
+const CUP=`<svg viewBox="0 0 120 130" aria-hidden="true"><defs><linearGradient id="cg" x1="0" x2="1"><stop offset="0" stop-color="#9aa3c7"/><stop offset=".45" stop-color="#f4f6ff"/><stop offset="1" stop-color="#8a93b8"/></linearGradient></defs><path d="M38 14h44l-3 40c-1 14-9 24-19 24s-18-10-19-24z" fill="url(#cg)"/><path d="M38 20c-26-2-34 10-30 24 4 12 18 16 30 10M82 20c26-2 34 10 30 24-4 12-18 16-30 10" fill="none" stroke="url(#cg)" stroke-width="7" stroke-linecap="round"/><rect x="54" y="78" width="12" height="18" fill="url(#cg)"/><path d="M40 96h40l6 18H34z" fill="url(#cg)"/><rect x="30" y="114" width="60" height="8" rx="2" fill="#F2C14E"/></svg>`;
+// Línea de tiempo del partido: goles locales arriba (cian), visitantes abajo (dorado).
 const tl=m=>{const all=m.hm.concat(m.am),D=all.some(v=>v>=910)?124:95,ps=v=>Math.min(99.5,(Math.floor(v/10)+(v%10)*.5)/D*100).toFixed(2);
  return`<div class="tl" aria-hidden="true"><b style="left:${(45.5/D*100).toFixed(2)}%"></b>${D>95?`<b style="left:${(90.5/D*100).toFixed(2)}%"></b>`:''}${m.hm.map(v=>`<i class="h" style="left:${ps(v)}%" title="${fmin(v)}"></i>`).join('')}${m.am.map(v=>`<i class="a" style="left:${ps(v)}%" title="${fmin(v)}"></i>`).join('')}</div>`};
-const mr=(m,btn)=>`<div class="m${m.h==S.me||m.a==S.me?' me':''}"><span>${cr(m.h)}${T[m.h][0]}</span><b class="sc">${m.done?m.hg+' – '+m.ag:'vs'}</b><span class="r">${T[m.a][0]}${cr(m.a)}</span>${m.real?`<div class="gl"><span>Resultado real</span></div>`:m.done?(m.hg+m.ag?tl(m):'')+`<div class="gl"><span>${m.hm.map(fmin).join(' ')}</span><span>${m.am.map(fmin).join(' ')}</span></div>`:pr(m)+(btn||'')}</div>`;
-function tieCard(t,k,lbl){let r='';if(t.done){const[x,y]=agg(t);r=`<div class="res">${t.l.length>1?`Global ${x}–${y}`:''}${t.et?' · prórroga':''}${t.pen?` · penales ${t.pen[0]}–${t.pen[1]}`:''}<br>Pasa: <b>${T[t.w][0]}</b></div>`}
- if(!t.done&&t.pa==null)t.pa=advP(t);
- return`<div class="card">${lbl?`<div class="lbl">${lbl}</div>`:''}${t.done?'':`<div class="res" style="margin:0 0 4px;border:0">Pasa: ${T[t.a][1]} <b>${t.pa}%</b> · ${T[t.b][1]} <b>${100-t.pa}%</b></div>`}${t.l.map((m,j)=>mr(m,j?'':`<button onclick="simTie(${k})">Simular ${t.l.length>1?'eliminatoria':'final'}</button>`)).join('')}${r}</div>`}
-function status(){if(S.me<0)return'';const n=T[S.me][0];let t='';
- if(S.st=='liga')t=`Seguís a ${n}: simulá las jornadas y mirá cómo termina (en «Probabilidades» ves sus chances).`;
- else if(S.st=='champ')t=S.ch==S.me?`🏆 ¡${n} es campeón de Europa!`:`${n} no ganó el título.`;
- else{const x=S.ties[S.st].find(x=>x.a==S.me||x.b==S.me);t=x?(x.done&&x.w!=S.me?`${n} quedó eliminado.`:`${n} sigue en carrera.`):(S.st=='playoff'&&S.pos.slice(0,8).includes(S.me)?`${n} espera en octavos.`:`${n} quedó eliminado.`)}
- return`<p class="sub" style="color:var(--gold)">${t}</p>`}
+// Partido como marcador de TV: un renglón por equipo, minutos de gol bajo el nombre.
+function mr(m,k){const p=m.done?null:p1x2(m),r=m.done?Math.sign(m.hg-m.ag):0;
+ const row=(i,g,mins,q,res)=>`<div class="tm ${m.done?res>0?'w':res<0?'l':'':''}">${cr(i)}<span class="nmw"><span class="nm">${esc(T[i][0])}</span>${mins&&mins.length?`<small>${mins.map(fmin).join(' ')}</small>`:''}</span>${m.done?`<b class="gs">${g}</b>`:`<em class="pp" title="Probabilidad de ganar">${q}%</em>`}</div>`;
+ const foot=m.real?`<div class="ft"><span class="tag">Resultado real</span></div>`:m.done?(m.hg+m.ag?tl(m):''):`<div class="ft"><div class="b3" title="Local ${p[0]}%, empate ${p[1]}%, visitante ${p[2]}%"><u style="width:${p[0]}%;background:var(--cyan)"></u><u style="width:${p[1]}%;background:var(--drw)"></u><u style="width:${p[2]}%;background:var(--gold)"></u></div><span>Empate ${p[1]}%</span>${k!=null?`<button class="sim" onclick="simOne(${k})">Simular</button>`:''}</div>`;
+ return`<article class="mt${m.h==S.me||m.a==S.me?' me':''}">${row(m.h,m.hg,m.real?null:m.hm,p&&p[0],r)}${row(m.a,m.ag,m.real?null:m.am,p&&p[2],-r)}${foot}</article>`}
+// Eliminatoria: columnas ida / vuelta / global (o una sola para la final).
+function tieCard(t,k,lbl,lbl2){const one=t.l.length==1;if(!t.done&&t.pa==null)t.pa=advP(t);
+ const legs=one?[]:t.l,g=(m,i)=>m.done?(m.h==i?m.hg:m.ag):'–',[x,y]=agg(t),cols=`28px minmax(0,1fr)${' 38px'.repeat(legs.length)} ${t.done?'46px':'54px'}`;
+ const hd=`<div class="tr hd" style="grid-template-columns:${cols}"><span></span><span></span>${legs.map((_,j)=>`<span class="v">${j?'Vuelta':'Ida'}</span>`).join('')}<span class="v">${t.done?(one?'Final':'Global'):'Pasa'}</span></div>`;
+ const row=(i,a,pa)=>`<div class="tr${t.done?t.w==i?' w':' l':''}${i==S.me?' me':''}" style="grid-template-columns:${cols}">${cr(i)}<span class="nm">${esc(T[i][0])}</span>${legs.map(m=>`<span class="v">${g(m,i)}</span>`).join('')}${t.done?`<span class="v g">${a}</span>`:`<span class="pa"><b>${pa}%</b></span>`}</div>`;
+ const pen=t.pen?[...t.pen].sort((a,b)=>b-a):null;
+ const foot=t.done?`<div class="tf"><span>Pasa <b>${esc(T[t.w][0])}</b>${pen?` por penales (${pen[0]}–${pen[1]})`:t.et?' en la prórroga':''}</span></div>`:`<div class="tf"><span>${one?'Partido único en cancha neutral':'Vuelta en casa de '+esc(T[t.b][0])}</span><button class="sim" onclick="simTie(${k})">Simular</button></div>`;
+ return`<div class="tie">${lbl?`<div class="th"><b>${lbl}</b><span>${lbl2||''}</span></div>`:''}${hd}${row(t.a,x,t.pa)}${row(t.b,y,100-t.pa)}${foot}</div>`}
 function koView(s){const ts=S.ties[s],half=ts.length/2;let h='<div class="ties">';
- ts.forEach((t,k)=>{if(half>=1&&k%half==0)h+=`<div class="half">${k?'Lado B':'Lado A'}</div>`;
-  const lbl=s=='playoff'?`Llave ${k+1} · el ganador va contra <b>${T[S.ko[k]][0]}</b> en octavos`:ts.length>1?`Llave ${k+1} · el ganador cruza con el de la llave ${(k^1)+1}`:'';
-  h+=tieCard(t,k,lbl)});
+ ts.forEach((t,k)=>{if(half>=1&&k%half==0)h+=`<h2 class="side">${k?'Lado B':'Lado A'}</h2>`;
+  const l2=s=='playoff'?`El ganador va contra ${esc(T[S.ko[k]][0])}`:ts.length>1?`El ganador cruza con la llave ${(k^1)+1}`:'';
+  h+=tieCard(t,k,ts.length>1?`Llave ${k+1}`:'',l2)});
  return h+'</div>'}
 // Cuadro visual de octavos a la final.
-function bracket(){if(S.st=='liga')return`<div class="card"><p class="sub" style="margin:0">El cuadro se arma con el sorteo, cuando termina la fase liga. Mientras tanto, en «Probabilidades» ves las chances de cada equipo de llegar a cada ronda.</p></div>`;
+function bracket(){if(S.st=='liga')return`<div class="pnl"><p class="empty">El cuadro se arma con el sorteo, cuando termina la fase liga. Mientras tanto, en «Probabilidades» ves las chances de cada equipo de llegar a cada ronda.</p></div>`;
  const R=['r16','qf','sf','final'],cols=[];let prev=null;
  R.forEach((r,ri)=>{const sl=[];for(let k=0;k<8>>ri;k++){const t=S.ties[r]&&S.ties[r][k];let a,b,ta='',tb='';
-   if(t){a=t.a;b=t.b}else if(ri==0){const p=S.ties.playoff[k];a=p.done?p.w:null;ta=`${T[p.a][1]} / ${T[p.b][1]}`;b=S.ko[k]}
-   else{const x=prev[2*k],y=prev[2*k+1];a=x.w;b=y.w;ta=`Ganador ${NM[R[ri-1]].toLowerCase()} ${2*k+1}`;tb=`Ganador ${NM[R[ri-1]].toLowerCase()} ${2*k+2}`}
+   if(t){a=t.a;b=t.b}else if(ri==0){const p=S.ties.playoff[k];a=p.done?p.w:null;ta=`${T[p.a][1]} o ${T[p.b][1]}`;b=S.ko[k]}
+   else{const x=prev[2*k],y=prev[2*k+1];a=x.w;b=y.w;ta=`Ganador llave ${2*k+1}`;tb=`Ganador llave ${2*k+2}`}
    sl.push({t,a,b,ta,tb,w:t&&t.done?t.w:null})}cols.push(sl);prev=sl});
  const row=(i,tbd,sc,w)=>i==null?`<div class="tbd"><em>${tbd||'Por definir'}</em></div>`:`<div class="${w==null?'':w==i?'w':'l'}${i==S.me?' me':''}">${cr(i)}<em>${esc(T[i][0])}</em>${sc!=null?`<b>${sc}</b>`:''}</div>`;
  const node=x=>{let sa=null,sb=null,ex='';if(x.t&&x.t.done){[sa,sb]=agg(x.t);ex=x.t.pen?`Penales ${x.t.pen[0]}–${x.t.pen[1]}`:x.t.et?'Con prórroga':''}
   return`<div class="nd">${row(x.a,x.ta,sa,x.w)}${row(x.b,x.tb,sb,x.w)}${ex?`<small>${ex}</small>`:''}</div>`};
  const ch=S.ch!=null?S.ch:null;
- return`<div class="card brw"><div class="br">${cols.map((c,ri)=>`<div class="col"><h4>${NM[R[ri]]}</h4><div class="in">${c.map(node).join('')}</div></div>`).join('')}<div class="col"><h4>Campeón</h4><div class="in"><div class="trophy"><div style="font-size:34px">🏆</div>${ch!=null?`${cr(ch)}<div style="font-weight:500">${esc(T[ch][0])}</div>`:'<div class="k">Por definir</div>'}</div></div></div></div></div>`}
+ return`<div class="brw"><div class="br">${cols.map((c,ri)=>`<div class="col${ri==3?' f':''}"><h3>${NM[R[ri]]}</h3><div class="in">${c.map(node).join('')}</div></div>`).join('')}<div class="col k"><h3>Campeón</h3><div class="in"><div class="cup">${CUP}${ch!=null?`${cr(ch)}<div>${esc(T[ch][0])}</div>`:'<p class="empty" style="margin-top:6px">Por definir</p>'}</div></div></div></div></div>`}
 function leagueTable(){const tb=table(),L=lastDay(),prev=L>0?table(S,L-1).map(r=>r.i):null,F=T.map(()=>[]);
- S.md.forEach((r,d)=>r.forEach(m=>{if(!m.done)return;const f=(i,o,x,y)=>F[i].push({r:x>y?'G':x<y?'P':'E',t:`J${d+1}: ${x}-${y} ${m.h==i?'vs':'en'} ${T[o][0]}`});f(m.h,m.a,m.hg,m.ag);f(m.a,m.h,m.ag,m.hg)}));
- return`<div class="card"><table><tr><th>#<th style="text-align:left">Equipo<th>PJ<th class="hm">G<th class="hm">E<th class="hm">P<th class="hm">GF:GC<th>DG<th class="hm">Forma<th>PTS</tr>${tb.map((r,p)=>{const mv=prev?prev.indexOf(r.i)-p:0;
-  return`<tr class="${p<8?'q':p<24?'p':'e'}${r.i==S.me?' me':''}"><td>${p+1}${mv?`<span class="mv ${mv>0?'u':'d'}">${mv>0?'▲':'▼'}${Math.abs(mv)}</span>`:''}<td class="n">${cr(r.i)}${T[r.i][0]}<td>${r.pj}<td class="hm">${r.w}<td class="hm">${r.d}<td class="hm">${r.l}<td class="hm">${r.gf}:${r.ga}<td>${r.gf-r.ga>0?'+':''}${r.gf-r.ga}<td class="hm fm">${F[r.i].slice(-5).map(x=>`<i class="f${x.r}" title="${esc(x.t)}"></i>`).join('')}<td class="pt">${r.pts}</tr>`}).join('')}</table></div>`}
+ S.md.forEach((r,d)=>r.forEach(m=>{if(!m.done)return;const f=(i,o,x,y)=>F[i].push({r:x>y?'G':x<y?'P':'E',t:`J${d+1}: ${x}-${y} ${m.h==i?'contra':'en cancha de'} ${T[o][0]}`});f(m.h,m.a,m.hg,m.ag);f(m.a,m.h,m.ag,m.hg)}));
+ return`<table class="lt"><colgroup><col class="c1"><col><col class="cs"><col class="cs hm"><col class="cs hm"><col class="cs hm"><col class="cg hm"><col class="cs"><col class="cf hm"><col class="cp"></colgroup><tr><th style="text-align:left;padding-left:10px">#<th style="text-align:left">Equipo<th>PJ<th class="hm">G<th class="hm">E<th class="hm">P<th class="hm">Goles<th>DG<th class="hm">Forma<th>Pts</tr>${tb.map((r,p)=>{const mv=prev?prev.indexOf(r.i)-p:0;
+  return`<tr class="${p<8?'q':p<24?'p':'e'}${p==8?' cut8':p==24?' cut24':''}${r.i==S.me?' me':''}"><td class="ps">${p+1}${mv?`<span class="mv ${mv>0?'u':'d'}" title="${mv>0?'Subió':'Bajó'} ${Math.abs(mv)}">${mv>0?'▲':'▼'}</span>`:''}<td class="tn"><div>${cr(r.i)}<span>${esc(T[r.i][0])}</span></div><td>${r.pj}<td class="hm">${r.w}<td class="hm">${r.d}<td class="hm">${r.l}<td class="hm">${r.gf}:${r.ga}<td>${r.gf-r.ga>0?'+':''}${r.gf-r.ga}<td class="hm fm">${F[r.i].slice(-5).map(x=>`<i class="f${x.r}" title="${esc(x.t)}"></i>`).join('')}<td class="pt">${r.pts}</tr>`}).join('')}</table>
+ <div class="key"><span><i style="background:var(--win)"></i>Octavos directo (1–8)</span><span><i style="background:var(--gold)"></i>Play-off (9–24)</span><span><i style="background:var(--out)"></i>Eliminados (25–36)</span></div>`}
+function rail(){const s=S.st,i=ST.indexOf(s),nd=nextDay();
+ const J=S.md.map((r,d)=>{const n=r.filter(m=>m.done).length;return`<div class="sg ${n==r.length?'done':n?'part':s=='liga'&&d==nd?'next':''}" title="Jornada ${d+1}: ${n} de ${r.length} partidos jugados"><i></i><span><b class="s1">J${d+1}</b><b class="s2">${d+1}</b></span></div>`}).join('');
+ const K=[['playoff','Play-off','PO'],['r16','Octavos','8.º'],['qf','Cuartos','4.º'],['sf','Semis','SF'],['final','Final','F']].map(([k,n,a])=>{const j=ST.indexOf(k);return`<div class="sg ${j<i?'done':j==i?(done()?'done':'next'):''}" title="${n}"><i></i><span><b class="s1">${n}</b><b class="s2">${a}</b></span></div>`}).join('');
+ return`<div class="rail"><div class="grp"><p>Fase liga</p><div class="segs">${J}</div></div><div class="grp"><p>Eliminatorias</p><div class="segs">${K}</div></div></div>`}
+function statusLine(){const s=S.st,nd=nextDay();let t;
+ if(s=='liga'){const pl=S.md.flat().filter(m=>m.done).length;t=nd<0?'<b>Fase liga terminada.</b> Avanzá al sorteo del play-off.':`<b>Próxima: jornada ${nd+1}.</b> ${pl} de 144 partidos de la fase liga jugados.`}
+ else if(s=='champ')t=`<b>${esc(T[S.ch][0])} es campeón de Europa.</b>`;
+ else{const ts=S.ties[s],d=ts.filter(x=>x.done).length;t=d==ts.length?`<b>${NM[s]} definid${s=='final'?'a':'os'}.</b>`:`<b>${NM[s]}.</b> ${d} de ${ts.length} ${ts.length>1?'llaves definidas':'partido jugado'}.`}
+ let me='';if(S.me>=0){const n=esc(T[S.me][0]);
+  if(s=='liga')me=`Seguís a ${n}.`;else if(s=='champ')me=S.ch==S.me?`¡${n} campeón!`:`${n} no ganó el título.`;
+  else{const x=S.ties[s].find(x=>x.a==S.me||x.b==S.me);me=x?(x.done&&x.w!=S.me?`${n} quedó eliminado.`:`${n} sigue en carrera.`):(s=='playoff'&&S.pos.slice(0,8).includes(S.me)?`${n} espera en octavos.`:`${n} quedó eliminado.`)}}
+ return`<p class="stl">${t}</p>${me?`<p class="me-st">${me}</p>`:''}`}
+function actions(){const s=S.st,i=ST.indexOf(s),nd=nextDay(),b=[];
+ if(s=='champ')b.push(`<button class="pri" onclick="init()">Jugar de nuevo</button>`);
+ else{if(s=='liga'&&nd>=0)b.push(`<button class="pri" onclick="simDay()">Simular jornada ${nd+1}</button>`,`<button class="sec" onclick="simStage();render()">Fase liga completa</button>`);
+  else if(done())b.push(`<button class="pri adv" onclick="adv();render()">${s=='final'?'Coronar al campeón':'Avanzar a '+NM[ST[i+1]].toLowerCase()}</button>`);
+  else b.push(`<button class="pri" onclick="simStage();render()">Simular ${s=='final'?'la final':NM[s].toLowerCase()}</button>`);
+  b.push(`<button class="sec" onclick="simAll();render()">Torneo completo</button>`)}
+ return`<div class="act ${['','one','two','three'][b.length]}">${b.join('')}</div>`}
 function saveS(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-function render(){const s=S.st,i=ST.indexOf(s),nd=nextDay();let h=`<div class="seg"><button class="${S.mode!='zero'?'on':''}" onclick="init('real')">Con resultados reales</button><button class="${S.mode=='zero'?'on':''}" onclick="init('zero')">Sin resultados (desde cero)</button></div><div class="steps">${ST.map((x,j)=>`<span class="${j==i?'on':j<i?'ok':''}">${NM[x]}</span>`).join('')}</div><div class="bar">`;
- if(s!='champ'){h+=s=='liga'?`<button onclick="simDay()" ${nd<0?'disabled':''}>${nd<0?'Jornadas completas':'Simular jornada '+(nd+1)}</button><button class="g" onclick="simStage();render()" ${nd<0?'disabled':''}>Simular fase liga</button>`:`<button onclick="simStage();render()" ${done()?'disabled':''}>Simular ronda</button>`;
-  h+=`<button class="gold" onclick="adv();render()" ${done()?'':'disabled'}>${s=='final'?'Coronar campeón':'Avanzar a '+NM[ST[i+1]]}</button><button class="g" onclick="simAll();render()">Simular todo el torneo</button>`}
- h+=`<select class="pick" aria-label="Tu equipo" onchange="S.me=+this.value;S.sel=S.me;render()"><option value="-1">Elegir mi equipo</option>${T.map((t,i)=>`<option value="${i}" ${i==S.me?'selected':''}>${t[0]}</option>`).join('')}</select><button class="g" onclick="init()">Reiniciar</button></div>${status()}`;
- h+=`<div class="tabs view">${[['t','Torneo'],['br','Cuadro'],['fc','Probabilidades']].map(([k,n])=>`<button class="${(S.view||'t')==k?'on':''}" onclick="S.view='${k}';render()">${n}</button>`).join('')}</div>`;
- if(S.view=='fc')h+=`<div id="fc"></div>`;
- else if(S.view=='br')h+=bracket();
- else if(s=='liga')h+=`<div class="grid">${leagueTable()}<div class="card"><div class="tabs">${S.md.map((_,d)=>`<button class="${d==S.day?'on':''}" onclick="S.day=${d};render()">J${d+1}</button>`).join('')}</div>${S.md[S.day].map((m,k)=>mr(m,`<button class="g" onclick="simOne(${k})">Simular</button>`)).join('')}</div></div>
-  <p class="note">Verde: directo a octavos (1–8). Dorado: play-off (9–24). Rojo: eliminados (25–36). Las flechas comparan con la jornada anterior; la forma muestra los últimos 5 partidos.</p>`;
- else if(s=='champ'){const f=S.ties.final[0];h+=`<div class="card champ"><div style="font-size:60px">🏆</div>${cr(S.ch)}<div class="big">${T[S.ch][0]}</div><div>Campeón de Europa 2026/27</div></div><div class="ties" style="margin-top:12px">${tieCard(f,0)}</div>`}
+function render(){const s=S.st,v=S.view||'t';
+ let h=rail()+statusLine();
+ h+=`<div class="cfg"><div class="seg" role="group" aria-label="Punto de partida"><button class="${S.mode!='zero'?'on':''}" aria-pressed="${S.mode!='zero'}" onclick="init('real')">Con resultados reales</button><button class="${S.mode=='zero'?'on':''}" aria-pressed="${S.mode=='zero'}" onclick="init('zero')">Desde cero</button></div><select class="pick" aria-label="Mi equipo" onchange="S.me=+this.value;S.sel=S.me;render()"><option value="-1">Elegir mi equipo</option>${T.map((t,i)=>`<option value="${i}" ${i==S.me?'selected':''}>${t[0]}</option>`).join('')}</select><button class="ghost" onclick="init()">Reiniciar</button></div>`;
+ h+=actions();
+ h+=`<nav class="views">${[['t',s=='liga'?'Fase liga':s=='champ'?'Campeón':NM[s]],['br','Cuadro'],['fc','Probabilidades']].map(([k,n])=>`<button class="${v==k?'on':''}" aria-pressed="${v==k}" onclick="S.view='${k}';render()">${n}</button>`).join('')}</nav>`;
+ if(v=='fc')h+=`<div id="fc"></div>`;
+ else if(v=='br')h+=bracket();
+ else if(s=='liga'){const lv=S.lv||'t';
+  h+=`<div class="lgv ${lv}"><div class="seg sw" role="group" aria-label="Ver"><button class="${lv=='t'?'on':''}" onclick="S.lv='t';render()">Tabla</button><button class="${lv=='p'?'on':''}" onclick="S.lv='p';render()">Partidos</button></div><div class="cols"><section class="pnl tbl"><h2>Tabla</h2>${leagueTable()}</section><section class="pnl mts"><h2>Partidos</h2><div class="chips">${S.md.map((r,d)=>`<button class="${d==S.day?'on':''}${r.every(m=>m.done)?' dn':''}" aria-pressed="${d==S.day}" onclick="S.day=${d};render()">J${d+1}</button>`).join('')}</div>${S.md[S.day].map((m,k)=>mr(m,k)).join('')}</section></div></div>`}
+ else if(s=='champ'){const f=S.ties.final[0];h+=`<section class="win">${CUP}${cr(S.ch)}<h2>${esc(T[S.ch][0])}</h2><p>Campeón de Europa 2026/27</p></section><div class="ties" style="margin-top:14px">${tieCard(f,0,'La final','')}</div>`}
  else h+=koView(s);
  document.getElementById('app').innerHTML=h;saveS();
- if(S.view=='fc')startFC()}
+ if(v=='fc')startFC()}
 const simDay=()=>{const d=nextDay();if(d<0)return;S.day=d;S.md[d].forEach(simM);render()};
 const simOne=k=>{simM(S.md[S.day][k]);render()};
 const simTie=k=>{simT(S.ties[S.st][k]);render()};
